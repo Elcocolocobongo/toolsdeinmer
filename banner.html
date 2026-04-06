@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* Limpiamos cualquier margen que pueda desplazar el contenido */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
@@ -12,29 +12,33 @@
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            padding: 10px; /* Espacio para que la sombra no se corte */
         }
 
+        /* CONTENEDOR BASE (RESPONSIVO CON MAX-WIDTH) */
         .header-container {
-            width: 508px;
-            height: 283px;
+            width: 100%;
+            max-width: 508px; /* Ancho máximo en PC */
             position: relative;
             overflow: hidden;
-            /* INTEGRACIÓN: Bordes redondeados y sombra sutil */
             border-radius: 15px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08); 
             background: #ffffff;
+            
+            /* PROPORCIÓN EN PC (Horizontal) */
+            aspect-ratio: 508 / 283; 
         }
 
+        /* IMAGEN CON AJUSTE AUTOMÁTICO */
         .banner-img {
-            width: 508px;
-            height: 283px;
+            width: 100%;
+            height: 100%;
             display: block;
-            object-fit: cover;
-            border-radius: 15px; /* Forzamos el redondeo en la imagen también */
+            object-fit: cover; /* Recorta y centra la imagen automáticamente */
+            object-position: center; /* Asegura que el centro sea visible */
+            border-radius: 15px;
         }
 
-        /* TELÓN LATERAL CON REVEAL SUAVE */
+        /* TELÓN LATERAL (RESPONSIVO) */
         .curtain {
             position: absolute;
             top: 0;
@@ -51,11 +55,6 @@
             z-index: 2;
         }
 
-        @keyframes slideLeftToRight {
-            0% { transform: translateX(-40%); }
-            100% { transform: translateX(100%); }
-        }
-
         /* DESTELLO FINAL */
         .header-container::after {
             content: '';
@@ -68,8 +67,40 @@
             z-index: 3;
         }
 
+        /* KEYFRAMES UNIFICADOS */
+        @keyframes slideLeftToRight {
+            0% { transform: translateX(-40%); }
+            100% { transform: translateX(100%); }
+        }
+
         @keyframes shine {
             100% { left: 180%; }
+        }
+
+        /* =========================================
+           MEDIA QUERY PARA TELÉFONOS (MÓVIL)
+           Se activa en pantallas de menos de 600px
+           ========================================= */
+        @media (max-width: 600px) {
+            .header-container {
+                /* CAMBIAMOS LA PROPORCIÓN A CUADRADA */
+                aspect-ratio: 1 / 1; 
+                border-radius: 12px; /* Un poco más sutil en móvil */
+            }
+
+            .banner-img {
+                border-radius: 12px;
+                /* object-fit: cover; ya está arriba, recortará al centro */
+            }
+
+            /* Suavizamos las animaciones para móvil */
+            .curtain {
+                animation-duration: 2.2s; 
+            }
+            .header-container::after {
+                animation-duration: 1.5s;
+                animation-delay: 2.2s;
+            }
         }
     </style>
 </head>
