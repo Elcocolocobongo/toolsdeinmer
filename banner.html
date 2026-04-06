@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        /* Limpieza total para integración */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
@@ -14,41 +15,41 @@
             align-items: flex-start;
         }
 
-        /* CONTENEDOR BASE (RESPONSIVO CON MAX-WIDTH) */
+        /* CONTENEDOR CON CONTROL ESTRICTO DE PROPORCIÓN */
         .header-container {
             width: 100%;
             max-width: 508px; /* Ancho máximo en PC */
             position: relative;
             overflow: hidden;
-            border-radius: 15px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08); 
+            border-radius: 15px; /* Bordes redondeados integrados */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Sombra para profundidad */
             background: #ffffff;
             
-            /* PROPORCIÓN EN PC (Horizontal) */
+            /* CONTROL DE ALTURA AUTOMÁTICO (Proporción original) */
             aspect-ratio: 508 / 283; 
         }
 
-        /* IMAGEN CON AJUSTE AUTOMÁTICO */
+        /* IMAGEN ADAPTATIVA */
         .banner-img {
             width: 100%;
             height: 100%;
             display: block;
-            object-fit: cover; /* Recorta y centra la imagen automáticamente */
-            object-position: center; /* Asegura que el centro sea visible */
+            object-fit: cover; /* Mantiene la proporción sin aplastar */
+            object-position: center; /* Centra el contenido importante */
             border-radius: 15px;
         }
 
-        /* TELÓN LATERAL (RESPONSIVO) */
+        /* TELÓN LATERAL AJUSTADO PARA CUBRIR TODO */
         .curtain {
             position: absolute;
             top: 0;
             left: 0;
-            width: 200%; 
+            width: 200%; /* Aumentado para cobertura total */
             height: 100%;
             background: linear-gradient(to right, 
                 transparent 0%, 
-                transparent 20%, 
-                white 35%, 
+                transparent 15%, 
+                white 25%, 
                 white 100%);
             
             animation: slideLeftToRight 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
@@ -67,40 +68,14 @@
             z-index: 3;
         }
 
-        /* KEYFRAMES UNIFICADOS */
+        /* KEYFRAMES UNIFICADOS Y PRECISOS */
         @keyframes slideLeftToRight {
-            0% { transform: translateX(-40%); }
+            0% { transform: translateX(-35%); }
             100% { transform: translateX(100%); }
         }
 
         @keyframes shine {
             100% { left: 180%; }
-        }
-
-        /* =========================================
-           MEDIA QUERY PARA TELÉFONOS (MÓVIL)
-           Se activa en pantallas de menos de 600px
-           ========================================= */
-        @media (max-width: 600px) {
-            .header-container {
-                /* CAMBIAMOS LA PROPORCIÓN A CUADRADA */
-                aspect-ratio: 1 / 1; 
-                border-radius: 12px; /* Un poco más sutil en móvil */
-            }
-
-            .banner-img {
-                border-radius: 12px;
-                /* object-fit: cover; ya está arriba, recortará al centro */
-            }
-
-            /* Suavizamos las animaciones para móvil */
-            .curtain {
-                animation-duration: 2.2s; 
-            }
-            .header-container::after {
-                animation-duration: 1.5s;
-                animation-delay: 2.2s;
-            }
         }
     </style>
 </head>
