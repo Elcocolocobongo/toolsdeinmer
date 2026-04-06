@@ -3,21 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <style>
-        body { 
-            margin: 0; 
-            display: flex; 
-            justify-content: center; 
-            align-items: flex-start; 
-            background-color: transparent; 
-            overflow: hidden;
-        }
+        body { margin: 0; display: flex; justify-content: center; background: transparent; overflow: hidden; }
 
         .header-container {
             width: 508px;
             height: 283px;
             position: relative;
             overflow: hidden;
-            background: white;
+            background: #ffffff;
         }
 
         .banner-img {
@@ -27,49 +20,47 @@
             object-fit: cover;
         }
 
-        /* TELÓN DIAGONAL (PROYECCIÓN) */
+        /* TELÓN CON REVEAL DIFUMINADO - AJUSTADO A 2s */
         .curtain {
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 250%; 
-            height: 250%;
-            /* El degradado inclinado para el efecto diagonal */
-            background: linear-gradient(135deg, 
-                transparent 0%, 
-                transparent 45%, 
-                white 55%, 
-                white 100%);
+            top: -110%; 
+            left: -110%;
+            width: 350%; 
+            height: 350%;
+            background: #ffffff;
             
-            /* Rotación para la diagonal y animación a 2.0s */
-            transform: rotate(-15deg);
+            transform: rotate(-25deg);
+            /* El difuminado (fade) del borde */
+            box-shadow: 0 0 80px 40px #ffffff; 
+            
             animation: slideDiagonal 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
             z-index: 2;
         }
 
         @keyframes slideDiagonal {
             0% {
-                transform: translate(-20%, -20%) rotate(-15deg);
+                transform: translate(-5%, -5%) rotate(-25deg);
             }
             100% {
-                transform: translate(60%, 60%) rotate(-15deg);
+                transform: translate(110%, 110%) rotate(-25deg);
             }
         }
 
-        /* Destello final sutil */
+        /* EL DESTELLO FINAL - SINCRONIZADO A LOS 2s */
         .header-container::after {
             content: '';
             position: absolute;
             top: 0; left: -100%;
-            width: 30%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+            width: 35%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.6), transparent);
             transform: skewX(-25deg);
-            animation: shine 1.2s ease-out 1.8s forwards;
+            /* Entra exacto al segundo 2.0 cuando el telón despeja */
+            animation: shine 1.2s ease-out 2s forwards;
             z-index: 3;
         }
 
         @keyframes shine {
-            100% { left: 160%; }
+            100% { left: 200%; }
         }
     </style>
 </head>
