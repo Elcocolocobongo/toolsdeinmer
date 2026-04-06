@@ -10,21 +10,46 @@
         .container {
             width: 100%;
             max-width: 508px;
-            aspect-ratio: 508 / 283; /* Proporción PC */
+            aspect-ratio: 508 / 283;
             position: relative;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background: #000; /* Fondo base para que no se vea blanco mientras carga */
         }
 
         img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
+        /* EL TELÓN */
         .curtain {
             position: absolute;
             top: 0; left: 0;
             width: 200%; height: 100%;
             background: linear-gradient(to right, transparent 0%, transparent 15%, white 25%, white 100%);
-            animation: slide 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            animation: slide 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            z-index: 2;
+        }
+
+        /* EL BRILLO (SHINE) */
+        .container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(
+                to right, 
+                transparent 0%, 
+                rgba(255, 255, 255, 0.1) 30%, 
+                rgba(255, 255, 255, 0.5) 50%, 
+                rgba(255, 255, 255, 0.1) 70%, 
+                transparent 100%
+            );
+            transform: skewX(-25deg);
+            /* Empieza a los 1.8s, justo cuando termina el telón */
+            animation: shine 1.2s ease-in-out 1.8s forwards;
+            z-index: 3;
         }
 
         @keyframes slide {
@@ -32,9 +57,14 @@
             100% { transform: translateX(100%); }
         }
 
+        @keyframes shine {
+            0% { left: -150%; }
+            100% { left: 150%; }
+        }
+
         /* AJUSTE PARA TELÉFONO */
         @media (max-width: 480px) {
-            .container { aspect-ratio: 1 / 1; } /* Se vuelve cuadrado en móvil */
+            .container { aspect-ratio: 1 / 1; }
         }
     </style>
 </head>
