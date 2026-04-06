@@ -5,22 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: transparent; overflow: hidden; }
+        body { background: transparent; overflow: hidden; display: flex; justify-content: center; align-items: flex-start; }
         
-        .full-container {
+        .canvas {
             width: 100vw;
-            height: 100vh;
+            /* La altura se calcula sola para mantener la proporción 508:283 */
+            height: calc(100vw * (283 / 508)); 
+            max-width: 508px;
+            max-height: 283px;
             position: relative;
             overflow: hidden;
             border-radius: 15px;
         }
 
-        img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: fill; /* Obliga a la imagen a llenar el alto sin recortarse */
-            display: block;
-        }
+        img { width: 100%; height: 100%; object-fit: contain; display: block; }
 
         .curtain {
             position: absolute;
@@ -46,7 +44,7 @@
     </style>
 </head>
 <body>
-    <div class="full-container">
+    <div class="canvas">
         <img src="https://i.postimg.cc/3RB3mzDT/d47e4141-e04b-4c9e-a77b-2c2fd117de53-ezgif-com-jpg-to-webp-converter.webp">
         <div class="curtain"></div>
         <div class="shine"></div>
