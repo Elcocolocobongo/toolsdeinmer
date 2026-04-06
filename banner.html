@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <style>
+        /* Limpiamos cualquier margen que pueda desplazar el contenido */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
@@ -10,6 +11,8 @@
             overflow: hidden; 
             display: flex;
             justify-content: center;
+            align-items: flex-start;
+            padding: 10px; /* Espacio para que la sombra no se corte */
         }
 
         .header-container {
@@ -17,7 +20,9 @@
             height: 283px;
             position: relative;
             overflow: hidden;
+            /* INTEGRACIÓN: Bordes redondeados y sombra sutil */
             border-radius: 15px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
             background: #ffffff;
         }
 
@@ -26,14 +31,15 @@
             height: 283px;
             display: block;
             object-fit: cover;
+            border-radius: 15px; /* Forzamos el redondeo en la imagen también */
         }
 
-        /* TELÓN LATERAL AJUSTADO */
+        /* TELÓN LATERAL CON REVEAL SUAVE */
         .curtain {
             position: absolute;
             top: 0;
             left: 0;
-            width: 200%; /* Aumentado para asegurar cobertura */
+            width: 200%; 
             height: 100%;
             background: linear-gradient(to right, 
                 transparent 0%, 
@@ -45,15 +51,9 @@
             z-index: 2;
         }
 
-        @Keyframes slideLeftToRight {
-            0% {
-                /* Empieza más a la izquierda para que el blanco cubra todo */
-                transform: translateX(-40%);
-            }
-            100% {
-                /* Se retira completamente */
-                transform: translateX(100%);
-            }
+        @keyframes slideLeftToRight {
+            0% { transform: translateX(-40%); }
+            100% { transform: translateX(100%); }
         }
 
         /* DESTELLO FINAL */
