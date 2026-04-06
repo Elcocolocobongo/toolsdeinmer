@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { margin: 0; padding: 0; overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        
+        .uft-widget {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        /* Ventana de Mensaje */
+        .msg-window {
+            width: 250px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            border: 1px solid #e1e4e8;
+            margin-bottom: 12px;
+            display: none; /* Se activa con JS */
+            overflow: hidden;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header { padding: 10px 15px; background: #f6f8fa; border-bottom: 1px solid #e1e4e8; display: flex; align-items: center; font-size: 12px; font-weight: bold; color: #24292e; }
+        .dot { width: 8px; height: 8px; background: #28a745; border-radius: 50%; margin-right: 8px; }
+        .content { padding: 15px; font-size: 13px; color: #444; line-height: 1.5; }
+        
+        /* Botón Píldora */
+        .pill {
+            display: flex;
+            align-items: center;
+            background: #ffffff;
+            padding: 5px 15px 5px 5px;
+            border-radius: 40px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid #d1d5da;
+            transition: transform 0.2s;
+            user-select: none;
+        }
+        .pill:hover { transform: scale(1.02); background: #fcfcfc; }
+        .pill img { width: 35px; height: 35px; border-radius: 50%; }
+        .pill-text { margin-left: 10px; }
+        .pill-text .name { display: block; font-size: 12px; font-weight: 600; color: #24292e; }
+        .pill-text .sub { font-size: 10px; color: #004A99; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="uft-widget">
+    <div class="msg-window" id="msgWindow">
+        <div class="header"><div class="dot"></div>Inmer Jesús Camacaro</div>
+        <div class="content">
+            Para este <strong>Dossier de Posición</strong>, asegúrense de que la refutación sea jurídica y no solo de opinión. ¡Mucho éxito!
+        </div>
+    </div>
+
+    <div class="pill" onclick="toggleMsg()">
+        <img src="https://ui-avatars.com/api/?name=Inmer+Camacaro&background=004A99&color=fff" alt="Avatar">
+        <div class="pill-text">
+            <span class="name">Inmer Jesús</span>
+            <span class="sub">CLIC PARA INFO</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleMsg() {
+        var win = document.getElementById('msgWindow');
+        win.style.display = (win.style.display === 'block') ? 'none' : 'block';
+    }
+</script>
+
+</body>
+</html>
