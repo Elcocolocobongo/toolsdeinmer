@@ -8,7 +8,7 @@
             background: transparent; 
             display: flex; 
             justify-content: center; 
-            padding: 5px; 
+            padding: 10px; 
             font-family: 'Segoe UI', Tahoma, sans-serif;
         }
         .tutor-card {
@@ -16,8 +16,8 @@
             max-width: 700px;
             background: #ffffff;
             border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border: 1px solid #f2f2f2;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid #f0f0f0;
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -28,52 +28,60 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px 15px;
+            padding: 25px 15px;
             border-bottom: 1px solid #f0f0f0;
         }
         .profile-img {
-            width: 130px;
-            height: 130px;
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid #ffffff;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            border: 5px solid #ffffff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             opacity: 0;
             animation: dropIn 0.8s ease-out 0.3s forwards;
         }
         .profile-name {
-            margin-top: 10px;
-            font-size: 20px;
+            margin-top: 12px;
+            font-size: 22px;
             color: #1a1a1a;
             font-weight: 700;
             opacity: 0;
             animation: dropIn 0.6s ease-out 0.6s forwards;
         }
         .profile-title {
-            font-size: 13px;
-            color: #666;
+            font-size: 14px;
+            color: #555;
             opacity: 0;
             animation: dropIn 0.6s ease-out 0.8s forwards;
         }
         .content-section {
-            padding: 20px 30px;
+            padding: 25px 35px;
             color: #333;
         }
         .text-content p {
-            font-size: 13px;
+            font-size: 13.5px;
             line-height: 1.6;
             text-align: justify;
-            margin-bottom: 12px;
+            margin-bottom: 12px; /* Espacio reducido entre párrafos */
             opacity: 0;
             transform: translateX(-20px);
         }
-        .p1 { animation: slideRight 0.6s ease-out 1.2s forwards; }
-        .p2 { animation: slideRight 0.6s ease-out 1.8s forwards; }
-        .p3 { animation: slideRight 0.6s ease-out 2.4s forwards; }
-        .p4 { animation: slideRight 0.6s ease-out 3.0s forwards; text-align: center !important; font-style: italic; color: #004481; }
+        /* SECUENCIA DE APARICIÓN */
+        .p1 { animation: slideRight 0.6s ease-out 1.5s forwards; }
+        .p2 { animation: slideRight 0.6s ease-out 2.2s forwards; }
+        .p3 { animation: slideRight 0.6s ease-out 2.9s forwards; }
+        .p4 { 
+            animation: slideRight 0.6s ease-out 3.6s forwards; 
+            text-align: center !important; 
+            font-style: italic; 
+            color: #004481; 
+            margin-top: 15px;
+            font-weight: 600;
+        }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes dropIn { from { opacity: 0; transform: translateY(-40px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes dropIn { from { opacity: 0; transform: translateY(-50px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes slideRight { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
     </style>
 </head>
@@ -86,9 +94,9 @@
         </div>
         <div class="content-section">
             <div class="text-content">
-                <p class="p1">Hola, es un gusto acompañarlos, soy <strong>Inmer Camacaro</strong>, Abogado y Politólogo de la UFT. He trabajado en el Poder Judicial en cargos de <em>Asistente, Secretario y Relator</em> en el estado Lara.</p>
-                <p class="p2">Ejerzo como jurista independiente en ramas como Civil, Mercantil e Internacional, asesorando instituciones en materia de derechos y relaciones internacionales.</p>
-                <p class="p3">En Ciencia Política, realizo asesorías de políticas privadas, desarrollo organizacional y análisis político.</p>
+                <p class="p1">Hola, es un gusto acompañarlos en este curso, mi nombre es <strong>Inmer Camacaro</strong>, egresado de la UFT. He trabajado en el Poder Judicial en cargos de <em>Asistente, Secretario y Relator</em> en el estado Lara.</p>
+                <p class="p2">Ejerzo como jurista independiente en ramas como Civil, Mercantil e Internacional, asesorando instituciones en materia de relaciones internacionales desde un enfoque legal y organizacional.</p>
+                <p class="p3">En Ciencia Política, me desempeño en asesorías de políticas privadas, desarrollo organizacional y análisis político.</p>
                 <p class="p4">Espero compartir con todos y que juntos aprendamos en el camino.</p>
             </div>
         </div>
