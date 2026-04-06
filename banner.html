@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body { 
-            margin: 0; 
-            display: flex; 
-            justify-content: center; 
-            align-items: flex-start; 
-            background-color: transparent; 
-            overflow: hidden;
+            background: transparent; 
+            overflow: hidden; 
+            display: flex;
+            justify-content: center;
         }
 
         .header-container {
@@ -17,47 +17,43 @@
             height: 283px;
             position: relative;
             overflow: hidden;
-            background: #ffffff;
+            /* Se integra con el diseño del SAIA */
+            border-radius: 15px; 
+            background: transparent;
         }
 
         .banner-img {
-            width: 508px;
-            height: 283px;
+            width: 100%;
+            height: 100%;
             display: block;
             object-fit: cover;
+            border-radius: 15px;
         }
 
-        /* TELÓN LATERAL RECTO (NO DIAGONAL) */
+        /* TELÓN LATERAL CON REVEAL SUAVE */
         .curtain {
             position: absolute;
             top: 0;
             left: 0;
             width: 150%; 
             height: 100%;
-            /* Borde esfumado recto */
+            /* El degradado ahora termina en el color de fondo del SAIA o transparente */
             background: linear-gradient(to right, 
                 transparent 0%, 
-                transparent 10%, 
-                white 20%, 
-                white 100%);
+                transparent 15%, 
+                #ffffff 25%, 
+                #ffffff 100%);
             
-            /* Animación a 2.0s */
             animation: slideLeftToRight 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
             z-index: 2;
         }
 
         @keyframes slideLeftToRight {
-            0% {
-                /* Empieza tapando todo el ancho de 508px */
-                transform: translateX(-20%);
-            }
-            100% {
-                /* Se retira totalmente a la derecha */
-                transform: translateX(100%);
-            }
+            0% { transform: translateX(-25%); }
+            100% { transform: translateX(100%); }
         }
 
-        /* Destello final sutil */
+        /* DESTELLO FINAL */
         .header-container::after {
             content: '';
             position: absolute;
@@ -65,7 +61,6 @@
             width: 30%; height: 100%;
             background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
             transform: skewX(-20deg);
-            /* Entra justo después del telón */
             animation: shine 1.2s ease-out 2s forwards;
             z-index: 3;
         }
