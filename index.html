@@ -2,85 +2,126 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { margin: 0; padding: 0; overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        
-        .uft-widget {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-        }
-
-        /* Ventana de Mensaje */
-        .msg-window {
-            width: 250px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-            border: 1px solid #e1e4e8;
-            margin-bottom: 12px;
-            display: none; /* Se activa con JS */
-            overflow: hidden;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(10px); }
+        /* Animación inicial de entrada desde abajo */
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .header { padding: 10px 15px; background: #f6f8fa; border-bottom: 1px solid #e1e4e8; display: flex; align-items: center; font-size: 12px; font-weight: bold; color: #24292e; }
-        .dot { width: 8px; height: 8px; background: #28a745; border-radius: 50%; margin-right: 8px; }
-        .content { padding: 15px; font-size: 13px; color: #444; line-height: 1.5; }
+        body { margin: 0; padding: 0; overflow: hidden; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: transparent; }
         
-        /* Botón Píldora */
-        .pill {
+        .widget-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+            z-index: 1000;
+            animation: slideInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        /* --- Caja de Mensaje (Abierta) --- */
+        .msg-box {
+            width: 50px; height: 50px;
+            background: white;
+            border-radius: 50px;
+            box-shadow: 0 12px 45px rgba(0,0,0,0.25);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            border: 1px solid #eee;
+        }
+
+        .msg-header { 
+            padding: 14px 18px; 
+            background: #f8f9fa; 
+            border-bottom: 2px solid #7a0700; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+        }
+        
+        .header-name { display: flex; align-items: center; }
+        .online-dot { width: 9px; height: 9px; background: #28a745; border-radius: 50%; box-shadow: 0 0 0 2px white; }
+        .header-name strong { font-size: 14px; color: #333; margin-left: 10px; font-weight: 700; }
+        .close-btn { cursor: pointer; font-size: 24px; color: #7a0700; font-weight: bold; line-height: 1; }
+        
+        .msg-body { padding: 20px; font-size: 15px; color: #333; line-height: 1.6; }
+
+        /* --- Píldora (Cerrada) --- */
+        .pill-fab {
             display: flex;
             align-items: center;
             background: #ffffff;
-            padding: 5px 15px 5px 5px;
+            padding: 6px 20px 6px 6px; 
             border-radius: 40px;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border: 1px solid #d1d5da;
-            transition: transform 0.2s;
-            user-select: none;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            z-index: 10;
+            border: 1px solid #eee;
         }
-        .pill:hover { transform: scale(1.02); background: #fcfcfc; }
-        .pill img { width: 35px; height: 35px; border-radius: 50%; }
-        .pill-text { margin-left: 10px; }
-        .pill-text .name { display: block; font-size: 12px; font-weight: 600; color: #24292e; }
-        .pill-text .sub { font-size: 10px; color: #004A99; font-weight: bold; }
+        .pill-fab:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(122, 7, 0, 0.2); }
+
+        .pill-fab img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid #7a0700; }
+        .pill-text { margin-left: 12px; display: flex; flex-direction: column; }
+        .pill-text .name { font-size: 14px; font-weight: 700; color: #212529; }
+        .pill-text .cta { font-size: 10px; color: #7a0700; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* --- Estado Activo --- */
+        .active .msg-box {
+            width: 320px;
+            height: auto;
+            border-radius: 15px;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .active .pill-fab {
+            opacity: 0;
+            transform: scale(0.5);
+            visibility: hidden;
+        }
     </style>
 </head>
 <body>
 
-<div class="uft-widget">
-    <div class="msg-window" id="msgWindow">
-        <div class="header"><div class="dot"></div>Inmer Jesús Camacaro</div>
-        <div class="content">
-            Para este <strong>Dossier de Posición</strong>, asegúrense de que la refutación sea jurídica y no solo de opinión. ¡Mucho éxito!
+<div class="widget-container" id="widget">
+    <div class="msg-box">
+        <div class="msg-header">
+            <div class="header-name">
+                <span class="online-dot"></span>
+                <strong>Inmer Camacaro</strong>
+            </div>
+            <span class="close-btn" onclick="toggleWidget()">×</span>
+        </div>
+        <div class="msg-body">
+            ¡Hola! El cumplimiento del <strong>Dossier de Rol Asignado</strong> es un requisito <strong>indispensable</strong>. Sin este paso previo, no se autorizará tu participación en el Debate. ¡Prepárate con rigor y mucho éxito!
         </div>
     </div>
 
-    <div class="pill" onclick="toggleMsg()">
-        <img src="https://ui-avatars.com/api/?name=Inmer+Camacaro&background=004A99&color=fff" alt="Avatar">
+    <div class="pill-fab" onclick="toggleWidget()">
+        <img src="https://i.postimg.cc/Jz6X1P57/ezgif-4ca1de2224c7e3.webp" alt="Inmer Camacaro">
         <div class="pill-text">
-            <span class="name">Inmer Jesús</span>
-            <span class="sub">CLIC PARA INFO</span>
+            <span class="name">Inmer C.</span>
+            <span class="cta">¡Esto te interesa!</span>
         </div>
     </div>
 </div>
 
 <script>
-    function toggleMsg() {
-        var win = document.getElementById('msgWindow');
-        win.style.display = (win.style.display === 'block') ? 'none' : 'block';
+    function toggleWidget() {
+        document.getElementById('widget').classList.toggle('active');
     }
 </script>
 
 </body>
 </html>
+
