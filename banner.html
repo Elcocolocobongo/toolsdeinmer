@@ -5,14 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { 
-            background: transparent; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center;
-            min-height: 100vh; /* 🔧 Asegura que el body tenga altura */
-        }
+        body { background: transparent; overflow: hidden; display: flex; justify-content: center; }
         
         .container {
             width: 100%;
@@ -20,53 +13,43 @@
             aspect-ratio: 508 / 283;
             position: relative;
             border-radius: 15px;
-            /* 🔧 overflow: visible para que el shine no se recorte */
-            overflow: visible; 
+            overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            background: #1a1a1a;
+            background: #000; /* Fondo base para que no se vea blanco mientras carga */
         }
 
-        img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            display: block; 
-            border-radius: 15px; /* 🔧 La imagen también con bordes redondeados */
-        }
+        img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-        /* TELÓN */
+        /* EL TELÓN */
         .curtain {
             position: absolute;
             top: 0; left: 0;
             width: 200%; height: 100%;
-            background: linear-gradient(to right, transparent 0%, transparent 15%, rgba(255,255,255,0.9) 25%, rgba(255,255,255,0.9) 100%);
+            background: linear-gradient(to right, transparent 0%, transparent 15%, white 25%, white 100%);
             animation: slide 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
             z-index: 2;
-            border-radius: 15px;
         }
 
-        /* ✨ BRILLO CORREGIDO */
+        /* EL BRILLO (SHINE) */
         .container::after {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%; /* 🔧 Más cercano para que entre antes */
-            width: 80%; /* 🔧 Más ancho para que se note más */
+            left: -150%;
+            width: 50%;
             height: 100%;
             background: linear-gradient(
                 to right, 
                 transparent 0%, 
-                rgba(255, 255, 255, 0.3) 20%, 
-                rgba(255, 255, 255, 0.9) 50%, /* 🔧 Más intenso */
-                rgba(255, 255, 255, 0.3) 80%, 
+                rgba(255, 255, 255, 0.1) 30%, 
+                rgba(255, 255, 255, 0.5) 50%, 
+                rgba(255, 255, 255, 0.1) 70%, 
                 transparent 100%
             );
-            transform: skewX(-20deg); /* 🔧 Menos inclinado = más visible */
-            animation: shine 1s ease-out 1.8s forwards;
+            transform: skewX(-25deg);
+            /* Empieza a los 1.8s, justo cuando termina el telón */
+            animation: shine 1.2s ease-in-out 1.8s forwards;
             z-index: 3;
-            pointer-events: none;
-            /* 🔧 Filtro para que brille de verdad */
-            filter: blur(2px);
         }
 
         @keyframes slide {
@@ -75,34 +58,19 @@
         }
 
         @keyframes shine {
-            0% { 
-                left: -100%; 
-                opacity: 0;
-            }
-            10% {
-                opacity: 1; /* 🔧 Aparece rápido */
-            }
-            100% { 
-                left: 100%; 
-                opacity: 0; /* 🔧 Se desvanece al salir */
-            }
+            0% { left: -150%; }
+            100% { left: 150%; }
         }
 
-        /* MÓVIL */
+        /* AJUSTE PARA TELÉFONO */
         @media (max-width: 480px) {
-            .container { 
-                aspect-ratio: 508 / 283; /* 🔧 Mantenemos proporción para evitar recortes */
-                border-radius: 12px;
-            }
-            .container::after {
-                width: 100%; /* 🔧 Shine más ancho en móvil */
-            }
+            .container { aspect-ratio: 1 / 1; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <img src="https://i.postimg.cc/3RB3mzDT/d47e4141-e04b-4c9e-a77b-2c2fd117de53-ezgif-com-jpg-to-webp-converter.webp" alt="Banner del curso">
+        <img src="https://i.postimg.cc/3RB3mzDT/d47e4141-e04b-4c9e-a77b-2c2fd117de53-ezgif-com-jpg-to-webp-converter.webp">
         <div class="curtain"></div>
     </div>
 </body>
