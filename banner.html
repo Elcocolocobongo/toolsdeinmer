@@ -17,40 +17,43 @@
             height: 283px;
             position: relative;
             overflow: hidden;
-            /* Se integra con el diseño del SAIA */
             border-radius: 15px; 
-            background: transparent;
+            background: #ffffff;
         }
 
         .banner-img {
-            width: 100%;
-            height: 100%;
+            width: 508px;
+            height: 283px;
             display: block;
             object-fit: cover;
-            border-radius: 15px;
         }
 
-        /* TELÓN LATERAL CON REVEAL SUAVE */
+        /* TELÓN LATERAL AJUSTADO */
         .curtain {
             position: absolute;
             top: 0;
             left: 0;
-            width: 150%; 
+            width: 200%; /* Aumentado para asegurar cobertura */
             height: 100%;
-            /* El degradado ahora termina en el color de fondo del SAIA o transparente */
             background: linear-gradient(to right, 
                 transparent 0%, 
-                transparent 15%, 
-                #ffffff 25%, 
-                #ffffff 100%);
+                transparent 20%, 
+                white 35%, 
+                white 100%);
             
             animation: slideLeftToRight 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
             z-index: 2;
         }
 
-        @keyframes slideLeftToRight {
-            0% { transform: translateX(-25%); }
-            100% { transform: translateX(100%); }
+        @Keyframes slideLeftToRight {
+            0% {
+                /* Empieza más a la izquierda para que el blanco cubra todo */
+                transform: translateX(-40%);
+            }
+            100% {
+                /* Se retira completamente */
+                transform: translateX(100%);
+            }
         }
 
         /* DESTELLO FINAL */
