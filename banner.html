@@ -10,19 +10,14 @@
         .container {
             width: 100%;
             max-width: 508px;
-            aspect-ratio: 508 / 283; /* BLOQUEO DE PROPORCIÓN */
+            aspect-ratio: 508 / 283;
             position: relative;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
+        img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
         .curtain {
             position: absolute;
@@ -39,9 +34,19 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="main-content">
         <img src="https://i.postimg.cc/3RB3mzDT/d47e4141-e04b-4c9e-a77b-2c2fd117de53-ezgif-com-jpg-to-webp-converter.webp">
         <div class="curtain"></div>
     </div>
+
+    <script>
+        function reportHeight() {
+            const height = document.body.scrollHeight;
+            window.parent.postMessage({ 'height': height }, '*');
+        }
+        window.onload = reportHeight;
+        window.onresize = reportHeight;
+        setInterval(reportHeight, 500); // Forzar chequeo cada medio segundo
+    </script>
 </body>
 </html>
