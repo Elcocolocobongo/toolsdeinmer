@@ -10,7 +10,7 @@
         .container {
             width: 100%;
             max-width: 508px;
-            aspect-ratio: 508 / 283;
+            aspect-ratio: 508 / 283; /* Proporción PC */
             position: relative;
             border-radius: 15px;
             overflow: hidden;
@@ -31,22 +31,17 @@
             0% { transform: translateX(-35%); }
             100% { transform: translateX(100%); }
         }
+
+        /* AJUSTE PARA TELÉFONO */
+        @media (max-width: 480px) {
+            .container { aspect-ratio: 1 / 1; } /* Se vuelve cuadrado en móvil */
+        }
     </style>
 </head>
 <body>
-    <div class="container" id="main-content">
+    <div class="container">
         <img src="https://i.postimg.cc/3RB3mzDT/d47e4141-e04b-4c9e-a77b-2c2fd117de53-ezgif-com-jpg-to-webp-converter.webp">
         <div class="curtain"></div>
     </div>
-
-    <script>
-        function reportHeight() {
-            const height = document.body.scrollHeight;
-            window.parent.postMessage({ 'height': height }, '*');
-        }
-        window.onload = reportHeight;
-        window.onresize = reportHeight;
-        setInterval(reportHeight, 500); // Forzar chequeo cada medio segundo
-    </script>
 </body>
 </html>
