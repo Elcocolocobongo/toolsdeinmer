@@ -1,56 +1,40 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: transparent; overflow: hidden; display: flex; justify-content: center; }
-        
-        .container {
-            width: 100%;
-            max-width: 508px;
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            line-height: 0; /* Mata espacios fantasma abajo */
-        }
+<div class="banner-fixed-container">
+  <iframe 
+    src="https://elcocolocobongo.github.io/toolsdeinmer/banner.html" 
+    class="saia-iframe-banner"
+    scrolling="no">
+  </iframe>
+</div>
 
-        img { 
-            width: 100%; 
-            height: auto; /* ESTO HACE QUE SE AMOLDE Y NO SE RECORTE */
-            display: block;
-            border-radius: 15px;
-        }
+<style>
+  .banner-fixed-container {
+    width: 100%;
+    max-width: 508px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 15px;
+  }
 
-        .curtain {
-            position: absolute;
-            top: 0; left: 0;
-            width: 200%; height: 100%;
-            background: linear-gradient(to right, transparent 0%, transparent 15%, white 25%, white 100%);
-            animation: slide 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-            z-index: 2;
-        }
+  .saia-iframe-banner {
+    width: 100%;
+    border: none;
+    display: block;
+    /* Altura para PC */
+    height: 283px; 
+  }
 
-        .shine {
-            position: absolute;
-            top: 0; left: -150%;
-            width: 60%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.8), transparent);
-            transform: skewX(-25deg);
-            animation: light 0.8s ease-in-out 1.5s forwards;
-            z-index: 3;
-        }
+  /* FUERZA BRUTA PARA MÓVIL (Ancho menor a 480px) */
+  @media (max-width: 480px) {
+    .saia-iframe-banner {
+      /* Aquí ajustamos la altura para que NO se corte en Android */
+      height: 210px !important; 
+    }
+  }
 
-        @keyframes slide { 0% { transform: translateX(-35%); } 100% { transform: translateX(100%); } }
-        @keyframes light { 0% { left: -150%; } 100% { left: 150%; } }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <img src="https://i.postimg.cc/3RB3mzDT/d47e4141-e04b-4c9e-a77b-2c2fd117de53-ezgif-com-jpg-to-webp-converter.webp">
-        <div class="curtain"></div>
-        <div class="shine"></div>
-    </div>
-</body>
-</html>
+  /* Para teléfonos muy pequeños */
+  @media (max-width: 360px) {
+    .saia-iframe-banner {
+      height: 185px !important;
+    }
+  }
+</style>
