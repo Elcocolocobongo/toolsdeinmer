@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background: transparent; 
+            display: flex; 
+            justify-content: center; 
+            padding: 20px;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .tutor-card {
+            width: 100%;
+            max-width: 900px;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            display: flex;
+            overflow: hidden;
+            border: 1px solid #f0f0f0;
+            animation: fadeInCard 0.8s ease-out forwards;
+        }
+
+        /* LADO DE LA FOTO: CAÍDA DESDE ARRIBA */
+        .photo-side {
+            flex: 1;
+            background: #fafafa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            border-right: 1px solid #f0f0f0;
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid #ffffff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            opacity: 0;
+            animation: dropIn 1s cubic-bezier(0.25, 1, 0.5, 1) 0.5s forwards;
+        }
+
+        .profile-name {
+            margin-top: 18px;
+            font-size: 22px;
+            color: #1a1a1a;
+            font-weight: 700;
+            text-align: center;
+            opacity: 0;
+            animation: dropIn 0.8s ease-out 0.8s forwards;
+        }
+
+        .profile-sub {
+            color: #555; 
+            font-weight: 600; 
+            font-size: 14px;
+            text-align: center;
+            margin-top: 5px;
+            opacity: 0; 
+            animation: dropIn 0.8s ease-out 1.1s forwards;
+        }
+
+        /* LADO DEL TEXTO: BARRIDO LATERAL SECUENCIAL */
+        .text-side {
+            flex: 2;
+            padding: 40px 50px;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .text-content p {
+            font-size: 13.5px;
+            line-height: 1.7;
+            text-align: justify;
+            margin-bottom: 15px;
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+
+        /* TIEMPOS DE APARICIÓN (DELAYS) */
+        .p1 { animation: slideRight 0.8s ease-out 2.0s forwards; }
+        .p2 { animation: slideRight 0.8s ease-out 2.8s forwards; }
+        .p3 { animation: slideRight 0.8s ease-out 3.6s forwards; }
+        .p4 { 
+            animation: slideRight 0.8s ease-out 4.4s forwards; 
+            text-align: center !important; 
+            font-style: italic;
+            color: #004481;
+            margin-top: 10px;
+        }
+
+        /* KEYFRAMES */
+        @keyframes fadeInCard {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes dropIn {
+            0% { opacity: 0; transform: translateY(-70px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideRight {
+            0% { opacity: 0; transform: translateX(-40px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="tutor-card">
+        <div class="photo-side">
+            <img src="https://i.postimg.cc/Jz6X1P57/ezgif-4ca1de2224c7e3.webp" class="profile-img">
+            <div class="profile-name">Inmer Camacaro</div>
+            <div class="profile-sub">Abogado y Politólogo</div>
+        </div>
+
+        <div class="text-side">
+            <div class="text-content">
+                <p class="p1">
+                    Hola, es un gusto acompañarlos en este curso, mi nombre es <strong>Inmer Camacaro</strong>, <strong>Abogado</strong> y <strong>Licenciado en Ciencia Política</strong> egresado de la Universidad Fermín Toro. En mi trayectoria profesional he incursionado en el ámbito público y privado al haber integrado la administración pública correlativo al Poder Judicial en cargos de <em>Asistente, Auxiliar de Secretaría, Secretario suplente y Abogado Relator</em> en Juzgados de Primera Instancia en lo Civil, Mercantil y del Tránsito de la Circunscripción Judicial del estado Lara adscrito a la Rectoría del Poder Judicial del estado Lara.
+                </p>
+                <p class="p2">
+                    Posteriormente y desde entonces, ejerzo como jurista en condición de libre ejercicio. En ello he incursionado en distintas ramas del Derecho como la Civil, Mercantil, Protección del Niño, Niña y Adolescente, Contencioso-Administrativo, Internacional Público y Privado. Asimismo, relativo a las dos últimas ramas, he asesorado a empresas, instituciones y fundaciones en materia de derechos y relaciones internacionales desde un enfoque socio-político, legal y organizacional.
+                </p>
+                <p class="p3">
+                    En Ciencia Política, me he desempeñado en asesorías de políticas privadas, desarrollo organizacional y análisis político.
+                </p>
+                <p class="p4">
+                    Espero compartir con todos y que juntos aprendamos en el camino.
+                </p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
