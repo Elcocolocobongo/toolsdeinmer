@@ -4,87 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* Limpieza total para integración */
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: transparent; overflow: hidden; display: flex; justify-content: center; }
         
-        body { 
-            background: transparent; 
-            overflow: hidden; 
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-        }
-
-        /* CONTENEDOR CON CONTROL ESTRICTO DE PROPORCIÓN */
-        .header-container {
+        .container {
             width: 100%;
-            max-width: 508px; /* Ancho máximo en PC */
+            max-width: 508px;
+            aspect-ratio: 508 / 283; /* BLOQUEO DE PROPORCIÓN */
             position: relative;
+            border-radius: 15px;
             overflow: hidden;
-            border-radius: 15px; /* Bordes redondeados integrados */
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Sombra para profundidad */
-            background: #ffffff;
-            
-            /* CONTROL DE ALTURA AUTOMÁTICO (Proporción original) */
-            aspect-ratio: 508 / 283; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        /* IMAGEN ADAPTATIVA */
-        .banner-img {
+        img {
             width: 100%;
             height: 100%;
+            object-fit: cover;
             display: block;
-            object-fit: cover; /* Mantiene la proporción sin aplastar */
-            object-position: center; /* Centra el contenido importante */
-            border-radius: 15px;
         }
 
-        /* TELÓN LATERAL AJUSTADO PARA CUBRIR TODO */
         .curtain {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 200%; /* Aumentado para cobertura total */
-            height: 100%;
-            background: linear-gradient(to right, 
-                transparent 0%, 
-                transparent 15%, 
-                white 25%, 
-                white 100%);
-            
-            animation: slideLeftToRight 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-            z-index: 2;
+            top: 0; left: 0;
+            width: 200%; height: 100%;
+            background: linear-gradient(to right, transparent 0%, transparent 15%, white 25%, white 100%);
+            animation: slide 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
-        /* DESTELLO FINAL */
-        .header-container::after {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 30%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
-            transform: skewX(-20deg);
-            animation: shine 1.2s ease-out 2s forwards;
-            z-index: 3;
-        }
-
-        /* KEYFRAMES UNIFICADOS Y PRECISOS */
-        @keyframes slideLeftToRight {
+        @keyframes slide {
             0% { transform: translateX(-35%); }
             100% { transform: translateX(100%); }
-        }
-
-        @keyframes shine {
-            100% { left: 180%; }
         }
     </style>
 </head>
 <body>
-
-<div class="header-container">
-    <img src="https://i.postimg.cc/3RB3mzDT/d47e4141-e04b-4c9e-a77b-2c2fd117de53-ezgif-com-jpg-to-webp-converter.webp" class="banner-img">
-    <div class="curtain"></div>
-</div>
-
+    <div class="container">
+        <img src="https://i.postimg.cc/3RB3mzDT/d47e4141-e04b-4c9e-a77b-2c2fd117de53-ezgif-com-jpg-to-webp-converter.webp">
+        <div class="curtain"></div>
+    </div>
 </body>
 </html>
