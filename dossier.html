@@ -1,39 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { margin: 0; padding: 0; background: transparent; overflow: visible; font-family: sans-serif; }
-        .container { position: fixed; bottom: 20px; right: 20px; z-index: 999999; }
-        
-        .box { transition: all 0.3s ease; opacity: 1; transform: scale(1); }
-        .hidden { opacity: 0; transform: scale(0); pointer-events: none; position: absolute; }
-        
-        .fab { display: flex; align-items: center; background: white; padding: 10px 20px; border-radius: 40px; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2); border: 1px solid #eee; }
-        .chat-bubble { width: 300px; background: white; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); border: 1px solid #eee; }
+        body { margin: 0; padding: 0; font-family: sans-serif; background: transparent; }
+
+        .widget-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+
+        /* --- Caja de Mensaje --- */
+        .msg-box {
+            width: 320px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 12px 45px rgba(0,0,0,0.25);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            border: 1px solid #eee;
+            overflow: hidden;
+        }
+
+        .active .msg-box { opacity: 1; visibility: visible; }
+
+        .msg-header { padding: 14px 18px; background: #f8f9fa; border-bottom: 2px solid #7a0700; display: flex; align-items: center; justify-content: space-between; }
+        .header-name { display: flex; align-items: center; }
+        .online-dot { width: 9px; height: 9px; background: #28a745; border-radius: 50%; box-shadow: 0 0 0 2px white; }
+        .header-name strong { font-size: 14px; color: #333; margin-left: 10px; }
+        .close-btn { cursor: pointer; font-size: 24px; color: #7a0700; font-weight: bold; }
+
+        .msg-body { padding: 20px; font-size: 15px; color: #333; line-height: 1.6; }
+
+        /* --- Píldora (FAB) --- */
+        .pill-fab { display: flex; align-items: center; background: #ffffff; padding: 6px 20px 6px 6px; border-radius: 40px; cursor: pointer; box-shadow: 0 8px 25px rgba(0,0,0,0.15); border: 1px solid #eee; }
+        .pill-fab img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid #7a0700; }
+        .pill-text { margin-left: 12px; display: flex; flex-direction: column; }
+        .pill-text .name { font-size: 14px; font-weight: 700; }
+        .pill-text .cta { font-size: 10px; color: #7a0700; font-weight: 800; text-transform: uppercase; }
+
+        /* --- SOLUCIÓN MÓVIL --- */
+        @media (max-width: 480px) {
+            .msg-box { width: 90vw !important; right: -10px; }
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div id="fab" class="box fab" onclick="showChat()">
-        <img src="https://i.postimg.cc/Jz6X1P57/ezgif-4ca1de2224c7e3.webp" style="width:40px; border-radius:50%;">
-        <div style="margin-left:10px;"><b>Inmer C.</b><br><small style="color:#7a0700;">¡ESTO TE INTERESA!</small></div>
+<div class="widget-container" id="widget">
+    <div class="msg-box">
+        <div class="msg-header">
+            <div class="header-name">
+                <span class="online-dot"></span>
+                <strong>Prof. Inmer Camacaro</strong>
+            </div>
+            <span class="close-btn" onclick="toggleWidget()">×</span>
+        </div>
+        <div class="msg-body">
+            ¡Hola! El cumplimiento del <strong>Dossier de Rol Asignado</strong> es un requisito <strong>indispensable</strong>. Sin este paso previo, no se autorizará tu participación en el Debate. ¡Prepárate con rigor y mucho éxito!
+        </div>
     </div>
 
-    <div id="bubble" class="box chat-bubble hidden">
-        <div style="padding:15px; border-bottom:2px solid #7a0700;"><b>Inmer Camacaro</b> <span style="float:right; cursor:pointer;" onclick="hideChat()">×</span></div>
-        <div style="padding:15px;">¡Hola! El cumplimiento del <b>Dossier</b> es indispensable.</div>
+    <div class="pill-fab" onclick="toggleWidget()">
+        <img src="https://i.postimg.cc/Jz6X1P57/ezgif-4ca1de2224c7e3.webp" alt="Inmer Camacaro">
+        <div class="pill-text">
+            <span class="name">Prof. Inmer C.</span>
+            <span class="cta">¡Esto te interesa!</span>
+        </div>
     </div>
 </div>
 
 <script>
-    function showChat() {
-        document.getElementById('fab').classList.add('hidden');
-        document.getElementById('bubble').classList.remove('hidden');
-    }
-    function hideChat() {
-        document.getElementById('bubble').classList.add('hidden');
-        document.getElementById('fab').classList.remove('hidden');
+    function toggleWidget() {
+        document.getElementById('widget').classList.toggle('active');
     }
 </script>
 
