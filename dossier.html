@@ -4,90 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* Animación inicial de entrada desde abajo */
-        @keyframes slideInUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        body { margin: 0; padding: 0; font-family: sans-serif; background: transparent; }
 
-        body { margin: 0; padding: 0; overflow: hidden; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: transparent; }
-        
         .widget-container {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            display: flex;
-            align-items: flex-end;
-            justify-content: flex-end;
-            z-index: 1000;
-            animation: slideInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            z-index: 9999;
         }
 
-        /* --- Caja de Mensaje (Abierta) --- */
+        /* --- Caja de Mensaje --- */
         .msg-box {
-            width: 50px; height: 50px;
+            width: 320px;
             background: white;
-            border-radius: 50px;
+            border-radius: 15px;
             box-shadow: 0 12px 45px rgba(0,0,0,0.25);
             opacity: 0;
             visibility: hidden;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            overflow: hidden;
+            transition: all 0.3s ease;
             position: absolute;
-            bottom: 0;
+            bottom: 70px;
             right: 0;
             border: 1px solid #eee;
+            overflow: hidden;
         }
 
-        .msg-header { 
-            padding: 14px 18px; 
-            background: #f8f9fa; 
-            border-bottom: 2px solid #7a0700; 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; 
-        }
-        
+        .active .msg-box { opacity: 1; visibility: visible; }
+
+        .msg-header { padding: 14px 18px; background: #f8f9fa; border-bottom: 2px solid #7a0700; display: flex; align-items: center; justify-content: space-between; }
         .header-name { display: flex; align-items: center; }
         .online-dot { width: 9px; height: 9px; background: #28a745; border-radius: 50%; box-shadow: 0 0 0 2px white; }
-        .header-name strong { font-size: 14px; color: #333; margin-left: 10px; font-weight: 700; }
-        .close-btn { cursor: pointer; font-size: 24px; color: #7a0700; font-weight: bold; line-height: 1; }
-        
+        .header-name strong { font-size: 14px; color: #333; margin-left: 10px; }
+        .close-btn { cursor: pointer; font-size: 24px; color: #7a0700; font-weight: bold; }
+
         .msg-body { padding: 20px; font-size: 15px; color: #333; line-height: 1.6; }
 
-        /* --- Píldora (Cerrada) --- */
-        .pill-fab {
-            display: flex;
-            align-items: center;
-            background: #ffffff;
-            padding: 6px 20px 6px 6px; 
-            border-radius: 40px;
-            cursor: pointer;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            transition: all 0.3s ease;
-            z-index: 10;
-            border: 1px solid #eee;
-        }
-        .pill-fab:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(122, 7, 0, 0.2); }
-
+        /* --- Píldora (FAB) --- */
+        .pill-fab { display: flex; align-items: center; background: #ffffff; padding: 6px 20px 6px 6px; border-radius: 40px; cursor: pointer; box-shadow: 0 8px 25px rgba(0,0,0,0.15); border: 1px solid #eee; }
         .pill-fab img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid #7a0700; }
         .pill-text { margin-left: 12px; display: flex; flex-direction: column; }
-        .pill-text .name { font-size: 14px; font-weight: 700; color: #212529; }
-        .pill-text .cta { font-size: 10px; color: #7a0700; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+        .pill-text .name { font-size: 14px; font-weight: 700; }
+        .pill-text .cta { font-size: 10px; color: #7a0700; font-weight: 800; text-transform: uppercase; }
 
-        /* --- Estado Activo --- */
-        .active .msg-box {
-            width: 320px;
-            height: auto;
-            border-radius: 15px;
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .active .pill-fab {
-            opacity: 0;
-            transform: scale(0.5);
-            visibility: hidden;
+        /* --- SOLUCIÓN MÓVIL --- */
+        @media (max-width: 480px) {
+            .msg-box { width: 90vw !important; right: -10px; }
         }
     </style>
 </head>
