@@ -1,90 +1,39 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* Estructura Base */
-        body { margin: 0; padding: 0; background: transparent; overflow: visible; font-family: 'Segoe UI', Roboto, sans-serif; }
+        body { margin: 0; padding: 0; background: transparent; overflow: visible; font-family: sans-serif; }
         .container { position: fixed; bottom: 20px; right: 20px; z-index: 999999; }
-
-        /* Animación suave */
-        .box {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            opacity: 1;
-            transform: scale(1);
-        }
-        .hidden { opacity: 0 !important; transform: scale(0) !important; pointer-events: none; }
-
-        /* Estilo Botón (FAB) */
-        .fab {
-            display: flex; align-items: center; background: white; padding: 6px 20px 6px 6px;
-            border-radius: 40px; cursor: pointer; box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            border: 1px solid #eee;
-        }
-        .fab img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid #7a0700; }
         
-        /* Estilo Burbuja (Chat) */
-        .chat-bubble {
-            width: 320px; background: white; border-radius: 15px;
-            box-shadow: 0 12px 45px rgba(0,0,0,0.25); border: 1px solid #eee;
-            position: relative;
-        }
-        .chat-bubble::after {
-            content: ''; position: absolute; bottom: -10px; right: 25px;
-            border-left: 10px solid transparent; border-right: 10px solid transparent;
-            border-top: 10px solid #fff;
-        }
-
-        /* Identidad Visual */
-        .msg-header { padding: 14px; border-bottom: 2px solid #7a0700; display: flex; align-items: center; justify-content: space-between; }
-        .online-dot { width: 9px; height: 9px; background: #28a745; border-radius: 50%; box-shadow: 0 0 0 2px white; }
-        .close-btn { cursor: pointer; color: #7a0700; font-weight: bold; font-size: 20px; }
-
-        @media (max-width: 480px) {
-            .chat-bubble { width: 85vw !important; }
-        }
+        .box { transition: all 0.3s ease; opacity: 1; transform: scale(1); }
+        .hidden { opacity: 0; transform: scale(0); pointer-events: none; position: absolute; }
+        
+        .fab { display: flex; align-items: center; background: white; padding: 10px 20px; border-radius: 40px; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2); border: 1px solid #eee; }
+        .chat-bubble { width: 300px; background: white; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); border: 1px solid #eee; }
     </style>
 </head>
 <body>
 
-<div class="container" id="main">
-    <!-- Botón -->
-    <div class="box fab" id="fab" onclick="toggle()">
-        <img src="https://i.postimg.cc/Jz6X1P57/ezgif-4ca1de2224c7e3.webp">
-        <div style="margin-left: 12px;">
-            <div style="font-weight: 700; font-size: 14px;">Inmer C.</div>
-            <div style="color: #7a0700; font-size: 10px; font-weight: 800; letter-spacing: 0.5px;">¡ESTO TE INTERESA!</div>
-        </div>
+<div class="container">
+    <div id="fab" class="box fab" onclick="showChat()">
+        <img src="https://i.postimg.cc/Jz6X1P57/ezgif-4ca1de2224c7e3.webp" style="width:40px; border-radius:50%;">
+        <div style="margin-left:10px;"><b>Inmer C.</b><br><small style="color:#7a0700;">¡ESTO TE INTERESA!</small></div>
     </div>
 
-    <!-- Burbuja -->
-    <div class="box chat-bubble hidden" id="bubble">
-        <div class="msg-header">
-            <div style="display:flex; align-items:center;">
-                <span class="online-dot"></span>
-                <strong style="margin-left:10px; font-size: 14px;">Inmer Camacaro</strong>
-            </div>
-            <span class="close-btn" onclick="toggle()">×</span>
-        </div>
-        <div style="padding: 20px; font-size: 15px; color: #333; line-height: 1.5;">
-            ¡Hola! El cumplimiento del <strong>Dossier de Rol Asignado</strong> es indispensable. ¡Prepárate con rigor y mucho éxito!
-        </div>
+    <div id="bubble" class="box chat-bubble hidden">
+        <div style="padding:15px; border-bottom:2px solid #7a0700;"><b>Inmer Camacaro</b> <span style="float:right; cursor:pointer;" onclick="hideChat()">×</span></div>
+        <div style="padding:15px;">¡Hola! El cumplimiento del <b>Dossier</b> es indispensable.</div>
     </div>
 </div>
 
 <script>
-    function toggle() {
-        const fab = document.getElementById('fab');
-        const bubble = document.getElementById('bubble');
-        
-        if (fab.classList.contains('hidden')) {
-            bubble.classList.add('hidden');
-            setTimeout(() => { fab.classList.remove('hidden'); }, 300);
-        } else {
-            fab.classList.add('hidden');
-            setTimeout(() => { bubble.classList.remove('hidden'); }, 300);
-        }
+    function showChat() {
+        document.getElementById('fab').classList.add('hidden');
+        document.getElementById('bubble').classList.remove('hidden');
+    }
+    function hideChat() {
+        document.getElementById('bubble').classList.add('hidden');
+        document.getElementById('fab').classList.remove('hidden');
     }
 </script>
 
