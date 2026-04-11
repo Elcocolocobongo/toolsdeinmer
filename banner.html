@@ -2,44 +2,45 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body { margin: 0; padding: 0; background: transparent !important; font-family: sans-serif; overflow: visible !important; }
-
-        /* El botón siempre está ahí, independiente del mensaje */
+        
+        /* Botón fijo: SIEMPRE EXISTE, NUNCA SE MUEVE */
         .pill-fab { 
-            position: fixed; bottom: 20px; right: 20px; z-index: 999999;
+            position: fixed; bottom: 20px; right: 20px; z-index: 999998;
             display: flex; align-items: center; background: white; padding: 6px 15px; 
             border-radius: 40px; cursor: pointer; border: 1px solid #7a0700;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
-        /* El mensaje es una capa aparte */
+        /* Mensaje: Cambia visibilidad, no bloque de visualización */
         .msg-box {
-            display: none; position: fixed; bottom: 80px; right: 20px; z-index: 999998;
-            width: 320px; background: white; border-radius: 15px;
+            position: fixed; bottom: 80px; right: 20px; z-index: 999999;
+            width: 300px; background: white; border-radius: 15px;
             box-shadow: 0 5px 25px rgba(0,0,0,0.3); border: 1px solid #7a0700;
+            visibility: hidden; opacity: 0;
         }
 
-        /* Movil: Centrado */
+        /* Clase para mostrar el mensaje */
+        .mostrar { visibility: visible !important; opacity: 1 !important; }
+
+        /* Ajuste móvil */
         @media (max-width: 480px) {
-            .msg-box { top: 20%; left: 5%; right: 5%; width: 90vw !important; bottom: auto; }
+            .msg-box { top: 20% !important; left: 5% !important; right: 5% !important; width: 90vw !important; bottom: auto !important; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Botón fijo (NUNCA DESAPARECE) -->
-    <div class="pill-fab" onclick="document.getElementById('msg').style.display='block'">
+    <div class="pill-fab" onclick="document.getElementById('msg').classList.add('mostrar')">
         <img src="https://i.postimg.cc/Jz6X1P57/ezgif-4ca1de2224c7e3.webp" style="width:35px; height:35px; border-radius:50%;">
         <div style="margin-left:10px; font-weight:bold; font-size:13px;">Prof. Inmer C.</div>
     </div>
 
-    <!-- Mensaje independiente -->
     <div class="msg-box" id="msg">
         <div style="padding:10px; border-bottom:2px solid #7a0700; display:flex; justify-content:space-between;">
             <strong>Prof. Inmer Camacaro</strong>
-            <span onclick="document.getElementById('msg').style.display='none'" style="cursor:pointer; font-weight:bold; color:#7a0700; font-size:20px;">×</span>
+            <span onclick="document.getElementById('msg').classList.remove('mostrar')" style="cursor:pointer; font-weight:bold; color:#7a0700; font-size:20px;">×</span>
         </div>
         <div style="padding:15px; font-size:14px; color:#333;">¡Hola! El cumplimiento del <strong>Dossier de Rol Asignado</strong> es requisito <strong>indispensable</strong>. ¡Mucho éxito!</div>
     </div>
