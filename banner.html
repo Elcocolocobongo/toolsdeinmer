@@ -4,43 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { margin: 0; padding: 0; background: transparent !important; font-family: sans-serif; overflow: visible !important; }
-        
-        /* Contenedor que permite clics */
-        .widget-container { 
-            position: absolute; bottom: 20px; right: 20px; z-index: 999999; 
-            pointer-events: auto; 
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: transparent; overflow: hidden; display: flex; justify-content: center; align-items: flex-start; }
+        .canvas {
+        width: 100vw;
+        /* La altura se calcula sola para mantener la proporción 508:283 */
+        height: calc(100vw * (283 / 508)); 
+        max-width: 508px;
+        max-height: 283px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 15px;
+    }
 
-        /* Botón original */
-        .pill-fab { 
-            display: flex; align-items: center; background: white !important; padding: 6px 20px 6px 6px; 
-            border-radius: 40px; cursor: pointer; border: 1px solid #eee !important;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-        
-        /* Mensaje original */
-        .msg-box {
-            display: none; width: 320px; background: white !important; border-radius: 15px !important;
-            box-shadow: 0 12px 45px rgba(0,0,0,0.25) !important; border: 1px solid #7a0700 !important;
-            position: absolute; bottom: 70px; right: 0;
-        }
-        .mostrar { display: block !important; }
-    </style>
+    img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+    .curtain {
+        position: absolute;
+        top: 0; left: 0;
+        width: 200%; height: 100%;
+        background: linear-gradient(to right, transparent 0%, transparent 15%, white 25%, white 100%);
+        animation: slide 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        z-index: 2;
+    }
+
+    .shine {
+        position: absolute;
+        top: 0; left: -150%;
+        width: 60%; height: 100%;
+        background: linear-gradient(to right, transparent, rgba(255,255,255,0.8), transparent);
+        transform: skewX(-25deg);
+        animation: light 0.8s ease-in-out 1.5s forwards;
+        z-index: 3;
+    }
+
+    @keyframes slide { 0% { transform: translateX(-35%); } 100% { transform: translateX(100%); } }
+    @keyframes light { 0% { left: -150%; } 100% { left: 150%; } }
+</style>
 </head>
 <body>
-    <div class="widget-container" id="widget">
-        <div class="msg-box" id="msg">
-            <div style="padding:14px; border-bottom:2px solid #7a0700 !important; display:flex; justify-content:space-between;">
-                <strong>Prof. Inmer Camacaro</strong>
-                <span onclick="document.getElementById('msg').classList.remove('mostrar')" style="cursor:pointer; font-weight:bold; color:#7a0700 !important; font-size:20px;">×</span>
-            </div>
-            <div style="padding:20px; font-size:15px; color:#333 !important;">¡Hola! El cumplimiento del <strong>Dossier de Rol Asignado</strong> es un requisito <strong>indispensable</strong>. ¡Mucho éxito!</div>
-        </div>
-        <div class="pill-fab" onclick="document.getElementById('msg').classList.add('mostrar')">
-            <img src="https://i.postimg.cc/Jz6X1P57/ezgif-4ca1de2224c7e3.webp" style="width:40px; height:40px; border-radius:50%; border:2px solid #7a0700 !important;">
-            <div style="margin-left:10px;"><strong>Prof. Inmer C.</strong><br><small style="color:#7a0700 !important; font-weight:bold;">¡ESTO TE INTERESA!</small></div>
-        </div>
+    <div class="canvas">
+        <img src="https://i.postimg.cc/3RB3mzDT/d47e4141-e04b-4c9e-a77b-2c2fd117de53-ezgif-com-jpg-to-webp-converter.webp">
+        <div class="curtain"></div>
+        <div class="shine"></div>
     </div>
 </body>
 </html>
