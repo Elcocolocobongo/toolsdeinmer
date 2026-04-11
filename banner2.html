@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="es" style="background: transparent;">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body { 
-            background: transparent !important; 
+            background: transparent; 
             overflow: hidden; 
+            width: 100%;
+            height: 100%;
         }
         body { 
             display: flex; 
@@ -15,17 +17,14 @@
             align-items: flex-start; 
         }
         .canvas {
-            width: 100vw;
-            height: calc(100vw * (283 / 508)); 
-            max-width: 508px;
-            max-height: 283px;
+            width: 100%;
+            height: 100%;
             position: relative;
             overflow: hidden;
-            border-radius: 15px;
-            background: transparent;
+            /* QUITA EL border-radius de aquí */
         }
 
-        img { width: 100%; height: 100%; object-fit: contain; display: block; }
+        img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
         .curtain {
             position: absolute;
