@@ -4,55 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { margin: 0; padding: 0; font-family: sans-serif; background: transparent; overflow: visible; }
-        .widget-container { position: fixed; bottom: 20px; right: 20px; z-index: 999999; }
+        body, html { margin: 0; padding: 0; background: transparent; overflow: visible; height: 100%; }
         
-        .msg-box {
-            width: 320px; background: white; border-radius: 15px; box-shadow: 0 12px 45px rgba(0,0,0,0.25);
-            opacity: 0; visibility: hidden; transition: all 0.3s ease;
-            position: absolute; bottom: 70px; right: 0; border: 1px solid #eee; overflow: hidden;
+        /* El contenedor ahora ocupa toda la pantalla del usuario, sin importar el iframe */
+        #main-wrapper {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none; /* Deja pasar los clics del Moodle */
+            z-index: 999999;
         }
-        .active .msg-box { opacity: 1; visibility: visible; }
-        .msg-header { padding: 14px 18px; background: #f8f9fa; border-bottom: 2px solid #7a0700; display: flex; align-items: center; justify-content: space-between; }
-        .msg-body { padding: 20px; font-size: 15px; color: #333; line-height: 1.6; }
-        
-        .pill-fab { display: flex; align-items: center; background: #ffffff; padding: 6px 20px 6px 6px; border-radius: 40px; cursor: pointer; box-shadow: 0 8px 25px rgba(0,0,0,0.15); border: 1px solid #eee; }
-        .pill-fab img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid #7a0700; }
 
-        /* MÓVIL: Fuerza el centrado y que no dependa del tamaño del iframe */
-        @media (max-width: 480px) {
-            .active .msg-box { 
-                position: fixed !important; 
-                bottom: 20% !important; 
-                right: 5% !important; 
-                left: 5% !important; 
-                width: 90vw !important; 
-            }
+        .widget-inner {
+            position: absolute;
+            bottom: 20px; right: 20px;
+            pointer-events: auto; /* Solo el widget recibe clics */
         }
+
+        .msg-box {
+            width: 320px; background: white; border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            display: none; /* Oculto por defecto */
+            position: absolute; bottom: 80px; right: 0;
+            border: 1px solid #eee; overflow: hidden;
+        }
+
+        /* En móvil forzamos el centrado total de la caja */
+        @media (max-width: 480px) {
+            .msg-box { width: 90vw !important; right: 5vw !important; bottom: 100px; }
+        }
+
+        .pill-fab { display: flex; align-items: center; background: #fff; padding: 6px 20px 6px 6px; border-radius: 40px; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
     </style>
 </head>
 <body>
-<div class="widget-container" id="widget">
-    <div class="msg-box">
-        <div class="msg-header">
-            <div style="display: flex; align-items: center;">
-                <span style="width:9px; height:9px; background:#28a745; border-radius:50%;"></span>
-                <strong style="margin-left:10px;">Prof. Inmer Camacaro</strong>
+
+<div id="main-wrapper">
+    <div class="widget-inner">
+        <div id="msg-box" class="msg-box">
+            <div style="padding:15px; border-bottom:2px solid #7a0700; display:flex; justify-content:space-between;">
+                <strong>Prof. Inmer Camacaro</strong>
+                <span onclick="toggle()" style="cursor:pointer; font-weight:bold; color:#7a0700;">×</span>
             </div>
-            <span style="cursor:pointer; font-size:24px; color:#7a0700;" onclick="toggleWidget()">×</span>
+            <div style="padding:20px;">¡Hola! El cumplimiento del <strong>Dossier</strong> es requisito <strong>indispensable</strong>.</div>
         </div>
-        <div class="msg-body">¡Hola! Te recuerdo que el cumplimiento del <strong>Dossier de Rol Asignado</strong> es un requisito <strong>indispensable</strong>. ¡Mucho éxito!</div>
-    </div>
-    <div class="pill-fab" onclick="toggleWidget()">
-        <img src="https://i.postimg.cc/Jz6X1P57/ezgif-4ca1de2224c7e3.webp">
-        <div style="margin-left:12px;">
-            <div style="font-weight:700;">Prof. Inmer C.</div>
-            <div style="color:#7a0700; font-size:10px; font-weight:800;">¡ESTO TE INTERESA!</div>
+
+        <div class="pill-fab" onclick="toggle()">
+            <img src="https://i.postimg.cc/Jz6X1P57/ezgif-4ca1de2224c7e3.webp" style="width:40px; height:40px; border-radius:50%; border: 2px solid #7a0700;">
+            <div style="margin-left:10px;"><strong>Prof. Inmer C.</strong><br><small style="color:#7a0700; font-weight:bold;">¡ESTO TE INTERESA!</small></div>
         </div>
     </div>
 </div>
+
 <script>
-    function toggleWidget() { document.getElementById('widget').classList.toggle('active'); }
+    function toggle() {
+        var b = document.getElementById('msg-box');
+        b.style.display = (b.style.display === 'block') ? 'none' : 'block';
+    }
 </script>
 </body>
 </html>
