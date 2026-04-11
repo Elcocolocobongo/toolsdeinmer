@@ -4,62 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body, html { margin: 0; padding: 0; background: transparent; overflow: visible; height: 100%; }
-        
-        /* El contenedor ahora ocupa toda la pantalla del usuario, sin importar el iframe */
-        #main-wrapper {
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: transparent; overflow: visible; }
+
+        .widget-container {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none; /* Deja pasar los clics del Moodle */
+            bottom: 20px;
+            right: 20px;
             z-index: 999999;
         }
 
-        .widget-inner {
-            position: absolute;
-            bottom: 20px; right: 20px;
-            pointer-events: auto; /* Solo el widget recibe clics */
-        }
-
         .msg-box {
-            width: 320px; background: white; border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            display: none; /* Oculto por defecto */
-            position: absolute; bottom: 80px; right: 0;
-            border: 1px solid #eee; overflow: hidden;
+            width: 320px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 12px 45px rgba(0,0,0,0.25);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            border: 1px solid #eee;
+            overflow: hidden;
         }
 
-        /* En móvil forzamos el centrado total de la caja */
+        .active .msg-box { opacity: 1; visibility: visible; }
+
+        .msg-header { padding: 14px 18px; background: #f8f9fa; border-bottom: 2px solid #7a0700; display: flex; align-items: center; justify-content: space-between; }
+        .header-name { display: flex; align-items: center; }
+        .online-dot { width: 9px; height: 9px; background: #28a745; border-radius: 50%; box-shadow: 0 0 0 2px white; }
+        .header-name strong { font-size: 14px; color: #333; margin-left: 10px; }
+        .close-btn { cursor: pointer; font-size: 24px; color: #7a0700; font-weight: bold; }
+
+        .msg-body { padding: 20px; font-size: 15px; color: #333; line-height: 1.6; }
+
+        .pill-fab { display: flex; align-items: center; background: #ffffff; padding: 6px 20px 6px 6px; border-radius: 40px; cursor: pointer; box-shadow: 0 8px 25px rgba(0,0,0,0.15); border: 1px solid #eee; }
+        .pill-fab img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid #7a0700; }
+        .pill-text { margin-left: 12px; display: flex; flex-direction: column; }
+        .pill-text .name { font-size: 14px; font-weight: 700; color: #212529; }
+        .pill-text .cta { font-size: 10px; color: #7a0700; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* Corrección de Android: Centrado para que no se desborde sin cambiar tamaños */
         @media (max-width: 480px) {
-            .msg-box { width: 90vw !important; right: 5vw !important; bottom: 100px; }
+            .active .msg-box { 
+                position: fixed !important; 
+                left: 5% !important; 
+                right: 5% !important; 
+                width: 90% !important; 
+                bottom: 20% !important; 
+            }
         }
-
-        .pill-fab { display: flex; align-items: center; background: #fff; padding: 6px 20px 6px 6px; border-radius: 40px; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
     </style>
 </head>
 <body>
 
-<div id="main-wrapper">
-    <div class="widget-inner">
-        <div id="msg-box" class="msg-box">
-            <div style="padding:15px; border-bottom:2px solid #7a0700; display:flex; justify-content:space-between;">
+<div class="widget-container" id="widget">
+    <div class="msg-box">
+        <div class="msg-header">
+            <div class="header-name">
+                <span class="online-dot"></span>
                 <strong>Prof. Inmer Camacaro</strong>
-                <span onclick="toggle()" style="cursor:pointer; font-weight:bold; color:#7a0700;">×</span>
             </div>
-            <div style="padding:20px;">¡Hola! El cumplimiento del <strong>Dossier</strong> es requisito <strong>indispensable</strong>.</div>
+            <span class="close-btn" onclick="toggleWidget()">×</span>
         </div>
+        <div class="msg-body">
+            ¡Hola! Te recuerdo que el cumplimiento del <strong>Dossier de Rol Asignado</strong> es un requisito <strong>indispensable</strong>. Sin esta entrega previa, no podrás participar en el Debate. No lo dejes para último ¡Mucho éxito!
+        </div>
+    </div>
 
-        <div class="pill-fab" onclick="toggle()">
-            <img src="https://i.postimg.cc/Jz6X1P57/ezgif-4ca1de2224c7e3.webp" style="width:40px; height:40px; border-radius:50%; border: 2px solid #7a0700;">
-            <div style="margin-left:10px;"><strong>Prof. Inmer C.</strong><br><small style="color:#7a0700; font-weight:bold;">¡ESTO TE INTERESA!</small></div>
+    <div class="pill-fab" onclick="toggleWidget()">
+        <img src="https://i.postimg.cc/Jz6X1P57/ezgif-4ca1de2224c7e3.webp" alt="Inmer Camacaro">
+        <div class="pill-text">
+            <span class="name">Prof. Inmer C.</span>
+            <span class="cta">¡Esto te interesa!</span>
         </div>
     </div>
 </div>
 
 <script>
-    function toggle() {
-        var b = document.getElementById('msg-box');
-        b.style.display = (b.style.display === 'block') ? 'none' : 'block';
+    function toggleWidget() {
+        document.getElementById('widget').classList.toggle('active');
     }
 </script>
+
 </body>
 </html>
