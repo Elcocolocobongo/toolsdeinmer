@@ -2,29 +2,30 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { margin: 0; padding: 0; background: transparent !important; font-family: sans-serif; overflow: visible !important; }
+        body { margin: 0; padding: 0; background: transparent !important; font-family: 'Segoe UI', Roboto, sans-serif !important; overflow: visible !important; }
         
-        /* Botón fijo: SIEMPRE EXISTE, NUNCA SE MUEVE */
+        /* Botón fijo: Siempre ahí, no se mueve */
         .pill-fab { 
             position: fixed; bottom: 20px; right: 20px; z-index: 999998;
-            display: flex; align-items: center; background: white; padding: 6px 15px; 
+            display: flex; align-items: center; background: white; padding: 6px 20px 6px 6px; 
             border-radius: 40px; cursor: pointer; border: 1px solid #7a0700;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
 
-        /* Mensaje: Cambia visibilidad, no bloque de visualización */
+        /* Mensaje: Aparece y desaparece sin animaciones raras */
         .msg-box {
             position: fixed; bottom: 80px; right: 20px; z-index: 999999;
-            width: 300px; background: white; border-radius: 15px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.3); border: 1px solid #7a0700;
+            width: 320px; background: white; border-radius: 15px;
+            box-shadow: 0 12px 45px rgba(0,0,0,0.25); border: 1px solid #7a0700;
             visibility: hidden; opacity: 0;
         }
 
-        /* Clase para mostrar el mensaje */
+        /* Clase para mostrar */
         .mostrar { visibility: visible !important; opacity: 1 !important; }
 
-        /* Ajuste móvil */
+        /* Ajuste móvil para que no se corte el texto */
         @media (max-width: 480px) {
             .msg-box { top: 20% !important; left: 5% !important; right: 5% !important; width: 90vw !important; bottom: auto !important; }
         }
@@ -32,17 +33,27 @@
 </head>
 <body>
 
+    <!-- Botón -->
     <div class="pill-fab" onclick="document.getElementById('msg').classList.add('mostrar')">
-        <img src="https://i.postimg.cc/Jz6X1P57/ezgif-4ca1de2224c7e3.webp" style="width:35px; height:35px; border-radius:50%;">
-        <div style="margin-left:10px; font-weight:bold; font-size:13px;">Prof. Inmer C.</div>
+        <img src="https://i.postimg.cc/Jz6X1P57/ezgif-4ca1de2224c7e3.webp" style="width:45px; height:45px; border-radius:50%; border: 2px solid #7a0700;">
+        <div style="margin-left: 12px;">
+            <div style="font-weight: 700; font-size: 14px; color: #212529;">Prof. Inmer C.</div>
+            <div style="color: #7a0700; font-size: 10px; font-weight: 800; text-transform: uppercase;">¡Esto te interesa!</div>
+        </div>
     </div>
 
+    <!-- Mensaje con todo el texto original -->
     <div class="msg-box" id="msg">
-        <div style="padding:10px; border-bottom:2px solid #7a0700; display:flex; justify-content:space-between;">
-            <strong>Prof. Inmer Camacaro</strong>
-            <span onclick="document.getElementById('msg').classList.remove('mostrar')" style="cursor:pointer; font-weight:bold; color:#7a0700; font-size:20px;">×</span>
+        <div style="padding: 14px 18px; border-bottom: 2px solid #7a0700; display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center;">
+                <span style="width: 9px; height: 9px; background: #28a745; border-radius: 50%;"></span>
+                <strong style="margin-left: 10px; font-size: 14px; color: #333;">Prof. Inmer Camacaro</strong>
+            </div>
+            <span onclick="document.getElementById('msg').classList.remove('mostrar')" style="cursor:pointer; font-size: 24px; color: #7a0700; font-weight: bold;">×</span>
         </div>
-        <div style="padding:15px; font-size:14px; color:#333;">¡Hola! El cumplimiento del <strong>Dossier de Rol Asignado</strong> es requisito <strong>indispensable</strong>. ¡Mucho éxito!</div>
+        <div style="padding: 20px; font-size: 15px; color: #333; line-height: 1.6;">
+            ¡Hola! Te recuerdo que el cumplimiento del <strong>Dossier de Rol Asignado</strong> es un requisito <strong>indispensable</strong>. Sin esta entrega previa, no podrás participar en el Debate. No lo dejes para último ¡Mucho éxito!
+        </div>
     </div>
 
 </body>
