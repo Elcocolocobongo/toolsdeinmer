@@ -5,33 +5,28 @@
     <style>
         body { margin: 0; padding: 0; background: transparent !important; overflow: visible !important; font-family: sans-serif; }
         .widget-container { position: fixed; bottom: 0; right: 0; z-index: 999999; }
-
+        
+        /* El cuadro de mensaje */
         .msg-box {
-            display: none; /* Instantáneo */
-            width: 320px; background: white; border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            display: none; width: 320px; background: white; border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.3); border: 1px solid #7a0700;
             position: absolute; bottom: 80px; right: 10px;
-            border: 1px solid #7a0700; overflow: hidden;
         }
-        .active .msg-box { display: block; }
-        .active .pill-fab { display: none; }
-
+        
+        /* El botón flotante */
         .pill-fab { 
             display: flex; align-items: center; background: white; padding: 6px 15px; 
-            border-radius: 40px; cursor: pointer; border: 1px solid #7a0700; box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-        }
-
-        @media (max-width: 480px) {
-            .active .msg-box { position: fixed !important; top: 20%; left: 5%; right: 5%; width: 90vw !important; bottom: auto; }
+            border-radius: 40px; cursor: pointer; border: 1px solid #7a0700;
+            position: absolute; bottom: 10px; right: 10px; white-space: nowrap;
         }
     </style>
 </head>
 <body>
     <div class="widget-container" id="widget">
         <div class="msg-box" id="msg">
-            <div style="padding:10px; border-bottom:2px solid #7a0700; display:flex; justify-content:space-between; align-items:center;">
+            <div style="padding:10px; border-bottom:2px solid #7a0700; display:flex; justify-content:space-between;">
                 <strong>Prof. Inmer Camacaro</strong>
-                <span onclick="toggle()" style="cursor:pointer; font-weight:bold; color:#7a0700;">×</span>
+                <span onclick="toggle()" style="cursor:pointer; font-weight:bold;">×</span>
             </div>
             <div style="padding:15px; font-size:14px;">¡Hola! El cumplimiento del <strong>Dossier de Rol Asignado</strong> es requisito <strong>indispensable</strong>. ¡Mucho éxito!</div>
         </div>
@@ -40,6 +35,11 @@
             <div style="margin-left:10px; font-size:13px; font-weight:bold;">Prof. Inmer C.</div>
         </div>
     </div>
-    <script>function toggle(){document.getElementById('widget').classList.toggle('active');}</script>
+    <script>
+        function toggle(){
+            var m = document.getElementById('msg');
+            m.style.display = (m.style.display === 'block') ? 'none' : 'block';
+        }
+    </script>
 </body>
 </html>
