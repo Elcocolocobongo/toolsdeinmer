@@ -2,44 +2,56 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { margin: 0; padding: 0; background: transparent !important; overflow: visible !important; font-family: sans-serif; }
-        .widget-container { position: fixed; bottom: 0; right: 0; z-index: 999999; }
+        body { margin: 0; padding: 0; background: transparent !important; font-family: sans-serif; overflow: visible !important; }
         
-        /* El cuadro de mensaje */
+        .widget-container { position: fixed; bottom: 20px; right: 20px; z-index: 999999; }
+
         .msg-box {
-            display: none; width: 320px; background: white; border-radius: 15px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.3); border: 1px solid #7a0700;
-            position: absolute; bottom: 80px; right: 10px;
+            display: none; /* Sin transiciones, sin parpadeos */
+            width: 320px; background: white; border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            position: absolute; bottom: 70px; right: 0;
+            border: 1px solid #7a0700; overflow: hidden;
         }
-        
-        /* El botón flotante */
+
+        .active .msg-box { display: block; }
+        .active .pill-fab { display: none; }
+
         .pill-fab { 
             display: flex; align-items: center; background: white; padding: 6px 15px; 
             border-radius: 40px; cursor: pointer; border: 1px solid #7a0700;
-            position: absolute; bottom: 10px; right: 10px; white-space: nowrap;
+        }
+
+        /* En móvil: Centro absoluto, ancho máximo 320px para que no se estire */
+        @media (max-width: 480px) {
+            .active .msg-box { 
+                position: fixed !important; 
+                top: 50% !important; 
+                left: 50% !important; 
+                transform: translate(-50%, -50%) !important; 
+                width: 90vw !important; 
+                max-width: 320px !important; /* IMPORTANTE: esto evita que se estire */
+                bottom: auto !important; 
+            }
         }
     </style>
 </head>
 <body>
     <div class="widget-container" id="widget">
         <div class="msg-box" id="msg">
-            <div style="padding:10px; border-bottom:2px solid #7a0700; display:flex; justify-content:space-between;">
+            <div style="padding:12px; border-bottom:2px solid #7a0700; display:flex; justify-content:space-between; align-items:center;">
                 <strong>Prof. Inmer Camacaro</strong>
-                <span onclick="toggle()" style="cursor:pointer; font-weight:bold;">×</span>
+                <span onclick="toggle()" style="cursor:pointer; font-weight:bold; color:#7a0700; font-size:20px;">×</span>
             </div>
-            <div style="padding:15px; font-size:14px;">¡Hola! El cumplimiento del <strong>Dossier de Rol Asignado</strong> es requisito <strong>indispensable</strong>. ¡Mucho éxito!</div>
+            <div style="padding:15px; font-size:14px; color:#333;">¡Hola! El cumplimiento del <strong>Dossier de Rol Asignado</strong> es requisito <strong>indispensable</strong>. ¡Mucho éxito!</div>
         </div>
         <div class="pill-fab" onclick="toggle()">
             <img src="https://i.postimg.cc/Jz6X1P57/ezgif-4ca1de2224c7e3.webp" style="width:35px; height:35px; border-radius:50%;">
-            <div style="margin-left:10px; font-size:13px; font-weight:bold;">Prof. Inmer C.</div>
+            <div style="margin-left:10px; font-weight:bold; font-size:13px;">Prof. Inmer C.</div>
         </div>
     </div>
-    <script>
-        function toggle(){
-            var m = document.getElementById('msg');
-            m.style.display = (m.style.display === 'block') ? 'none' : 'block';
-        }
-    </script>
+    <script>function toggle(){document.getElementById('widget').classList.toggle('active');}</script>
 </body>
 </html>
