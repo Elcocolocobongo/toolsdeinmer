@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: transparent; overflow: visible; }
+        body { margin: 0; padding: 0; background: transparent; overflow: visible; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
 
+        /* Contenedor que flota sobre todo */
         .widget-container {
             position: fixed;
             bottom: 20px;
             right: 20px;
             z-index: 999999;
+            pointer-events: auto; /* IMPORTANTE: esto reactiva el clic en el botón */
         }
 
         .msg-box {
@@ -25,7 +27,7 @@
             bottom: 70px;
             right: 0;
             border: 1px solid #eee;
-            overflow: hidden;
+            overflow: visible; /* Asegura que el contenido no se corte */
         }
 
         .active .msg-box { opacity: 1; visibility: visible; }
@@ -44,14 +46,14 @@
         .pill-text .name { font-size: 14px; font-weight: 700; color: #212529; }
         .pill-text .cta { font-size: 10px; color: #7a0700; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
 
-        /* Corrección de Android: Centrado para que no se desborde sin cambiar tamaños */
         @media (max-width: 480px) {
             .active .msg-box { 
                 position: fixed !important; 
+                top: 20% !important; 
                 left: 5% !important; 
                 right: 5% !important; 
-                width: 90% !important; 
-                bottom: 20% !important; 
+                width: 90vw !important; 
+                bottom: auto !important; 
             }
         }
     </style>
