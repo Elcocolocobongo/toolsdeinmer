@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { margin: 0; padding: 0; font-family: sans-serif; background: transparent; }
-
+        body { margin: 0; padding: 0; font-family: sans-serif; background: transparent; overflow: visible; }
+        
         .widget-container {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            z-index: 9999;
+            z-index: 999999;
         }
 
         /* --- Caja de Mensaje --- */
@@ -46,9 +46,16 @@
         .pill-text .name { font-size: 14px; font-weight: 700; }
         .pill-text .cta { font-size: 10px; color: #7a0700; font-weight: 800; text-transform: uppercase; }
 
-        /* --- SOLUCIÓN MÓVIL --- */
+        /* --- SOLUCIÓN PARA ANDROID (Sin cambiar el tamaño del texto) --- */
         @media (max-width: 480px) {
-            .msg-box { width: 90vw !important; right: -10px; }
+            .widget-container { right: 10px; left: 10px; }
+            .msg-box { 
+                width: 100% !important; 
+                right: 0 !important; 
+                left: 0 !important; 
+                margin: 0 auto; 
+                bottom: 80px; 
+            }
         }
     </style>
 </head>
@@ -64,7 +71,7 @@
             <span class="close-btn" onclick="toggleWidget()">×</span>
         </div>
         <div class="msg-body">
-            ¡Hola! Te recuerdo que el cumplimiento del <strong>Dossier de Rol Asignado</strong> es un requisito <strong>indispensable</strong>. Sin este entrega previa, no podrás participar en el Debate. No lo dejes para último ¡Mucho éxito!
+            ¡Hola! Te recuerdo que el cumplimiento del <strong>Dossier de Rol Asignado</strong> es un requisito <strong>indispensable</strong>. Sin esta entrega previa, no podrás participar en el Debate. No lo dejes para último ¡Mucho éxito!
         </div>
     </div>
 
