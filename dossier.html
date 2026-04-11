@@ -4,55 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { margin: 0; padding: 0; background: transparent; overflow: visible; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+        /* Bloqueo de fuente y estilo para que Moodle no lo rompa */
+        body { 
+            margin: 0; padding: 0; 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important; 
+            background: transparent !important; 
+            overflow: visible !important; 
+        }
 
-        /* Contenedor que flota sobre todo */
         .widget-container {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            z-index: 999999;
-            pointer-events: auto; /* IMPORTANTE: esto reactiva el clic en el botón */
+            z-index: 999999 !important;
         }
 
         .msg-box {
             width: 320px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 12px 45px rgba(0,0,0,0.25);
+            background: white !important;
+            border-radius: 15px !important;
+            box-shadow: 0 12px 45px rgba(0,0,0,0.25) !important;
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
             position: absolute;
             bottom: 70px;
             right: 0;
-            border: 1px solid #eee;
-            overflow: visible; /* Asegura que el contenido no se corte */
+            border: 1px solid #eee !important;
+            overflow: hidden;
         }
 
         .active .msg-box { opacity: 1; visibility: visible; }
 
-        .msg-header { padding: 14px 18px; background: #f8f9fa; border-bottom: 2px solid #7a0700; display: flex; align-items: center; justify-content: space-between; }
+        .msg-header { padding: 14px 18px; background: #f8f9fa !important; border-bottom: 2px solid #7a0700 !important; display: flex; align-items: center; justify-content: space-between; }
         .header-name { display: flex; align-items: center; }
-        .online-dot { width: 9px; height: 9px; background: #28a745; border-radius: 50%; box-shadow: 0 0 0 2px white; }
-        .header-name strong { font-size: 14px; color: #333; margin-left: 10px; }
-        .close-btn { cursor: pointer; font-size: 24px; color: #7a0700; font-weight: bold; }
+        .online-dot { width: 9px; height: 9px; background: #28a745 !important; border-radius: 50%; box-shadow: 0 0 0 2px white; }
+        .header-name strong { font-size: 14px !important; color: #333 !important; margin-left: 10px; font-weight: bold; }
+        .close-btn { cursor: pointer; font-size: 24px; color: #7a0700 !important; font-weight: bold; }
 
-        .msg-body { padding: 20px; font-size: 15px; color: #333; line-height: 1.6; }
+        .msg-body { padding: 20px; font-size: 15px !important; color: #333 !important; line-height: 1.6; }
 
-        .pill-fab { display: flex; align-items: center; background: #ffffff; padding: 6px 20px 6px 6px; border-radius: 40px; cursor: pointer; box-shadow: 0 8px 25px rgba(0,0,0,0.15); border: 1px solid #eee; }
-        .pill-fab img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid #7a0700; }
+        .pill-fab { display: flex; align-items: center; background: #ffffff !important; padding: 6px 20px 6px 6px; border-radius: 40px; cursor: pointer; box-shadow: 0 8px 25px rgba(0,0,0,0.15); border: 1px solid #eee !important; }
+        .pill-fab img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid #7a0700 !important; }
         .pill-text { margin-left: 12px; display: flex; flex-direction: column; }
-        .pill-text .name { font-size: 14px; font-weight: 700; color: #212529; }
-        .pill-text .cta { font-size: 10px; color: #7a0700; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+        .pill-text .name { font-size: 14px !important; font-weight: 700 !important; color: #212529 !important; }
+        .pill-text .cta { font-size: 10px !important; color: #7a0700 !important; font-weight: 800 !important; text-transform: uppercase; letter-spacing: 0.5px; }
 
         @media (max-width: 480px) {
             .active .msg-box { 
                 position: fixed !important; 
-                top: 20% !important; 
-                left: 5% !important; 
-                right: 5% !important; 
-                width: 90vw !important; 
+                top: 50% !important; 
+                left: 50% !important; 
+                transform: translate(-50%, -50%) !important; 
+                width: 90% !important; 
                 bottom: auto !important; 
             }
         }
