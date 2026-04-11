@@ -5,35 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body { margin: 0; padding: 0; background: transparent !important; font-family: sans-serif; overflow: visible !important; }
-        
         .widget-container { position: fixed; bottom: 20px; right: 20px; z-index: 999999; }
 
-        .msg-box {
-            display: none; /* Sin transiciones, sin parpadeos */
-            width: 320px; background: white; border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            position: absolute; bottom: 70px; right: 0;
-            border: 1px solid #7a0700; overflow: hidden;
-        }
-
-        .active .msg-box { display: block; }
-        .active .pill-fab { display: none; }
-
+        /* Estilo del botón (FAB) */
         .pill-fab { 
             display: flex; align-items: center; background: white; padding: 6px 15px; 
             border-radius: 40px; cursor: pointer; border: 1px solid #7a0700;
+            transition: all 0.3s ease;
         }
 
-        /* En móvil: Centro absoluto, ancho máximo 320px para que no se estire */
+        /* Caja de mensaje (Estado inicial cerrado) */
+        .msg-box {
+            display: none; width: 320px; background: white; border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.25);
+            position: absolute; bottom: 70px; right: 0;
+            border: 1px solid #7a0700;
+            /* Animación solo para abrir */
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        /* Clase activa para mostrar */
+        .active .msg-box { display: block; }
+        .active .pill-fab { display: none; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Ajuste móvil */
         @media (max-width: 480px) {
             .active .msg-box { 
-                position: fixed !important; 
-                top: 50% !important; 
-                left: 50% !important; 
-                transform: translate(-50%, -50%) !important; 
-                width: 90vw !important; 
-                max-width: 320px !important; /* IMPORTANTE: esto evita que se estire */
-                bottom: auto !important; 
+                position: fixed !important; top: 20% !important; left: 5% !important; 
+                right: 5% !important; width: 90vw !important; bottom: auto !important; 
             }
         }
     </style>
@@ -43,15 +44,18 @@
         <div class="msg-box" id="msg">
             <div style="padding:12px; border-bottom:2px solid #7a0700; display:flex; justify-content:space-between; align-items:center;">
                 <strong>Prof. Inmer Camacaro</strong>
-                <span onclick="toggle()" style="cursor:pointer; font-weight:bold; color:#7a0700; font-size:20px;">×</span>
+                <span onclick="closeWidget()" style="cursor:pointer; font-weight:bold; color:#7a0700; font-size:20px;">×</span>
             </div>
             <div style="padding:15px; font-size:14px; color:#333;">¡Hola! El cumplimiento del <strong>Dossier de Rol Asignado</strong> es requisito <strong>indispensable</strong>. ¡Mucho éxito!</div>
         </div>
-        <div class="pill-fab" onclick="toggle()">
+        <div class="pill-fab" onclick="openWidget()">
             <img src="https://i.postimg.cc/Jz6X1P57/ezgif-4ca1de2224c7e3.webp" style="width:35px; height:35px; border-radius:50%;">
             <div style="margin-left:10px; font-weight:bold; font-size:13px;">Prof. Inmer C.</div>
         </div>
     </div>
-    <script>function toggle(){document.getElementById('widget').classList.toggle('active');}</script>
+    <script>
+        function openWidget() { document.getElementById('widget').classList.add('active'); }
+        function closeWidget() { document.getElementById('widget').classList.remove('active'); }
+    </script>
 </body>
 </html>
