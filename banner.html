@@ -2,34 +2,26 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { margin: 0; padding: 0; background: transparent !important; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important; overflow: visible !important; }
+        body { margin: 0; padding: 0; background: transparent !important; font-family: sans-serif; overflow: visible !important; }
         
-        /* Botón fijo: SIEMPRE EXISTE, NUNCA SE MUEVE */
+        /* Botón fijo: Pointer events auto permite el clic */
         .pill-fab { 
             position: fixed; bottom: 20px; right: 20px; z-index: 999998;
             display: flex; align-items: center; background: white !important; padding: 6px 20px 6px 6px; 
             border-radius: 40px; cursor: pointer; border: 1px solid #eee !important;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15); pointer-events: auto;
         }
-        .pill-fab img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid #7a0700 !important; }
-        .pill-text { margin-left: 12px; display: flex; flex-direction: column; }
-        .pill-text .name { font-size: 14px !important; font-weight: 700 !important; color: #212529 !important; }
-        .pill-text .cta { font-size: 10px !important; color: #7a0700 !important; font-weight: 800 !important; text-transform: uppercase; letter-spacing: 0.5px; }
 
-        /* Mensaje: Punto verde, cabecera original, texto completo */
+        /* Mensaje */
         .msg-box {
+            display: none; /* Cero animaciones */
             position: fixed; bottom: 80px; right: 20px; z-index: 999999;
             width: 320px; background: white !important; border-radius: 15px !important;
             box-shadow: 0 12px 45px rgba(0,0,0,0.25) !important; border: 1px solid #eee !important;
-            visibility: hidden; opacity: 0;
         }
-        .mostrar { visibility: visible !important; opacity: 1 !important; }
 
-        .msg-header { padding: 14px 18px; background: #f8f9fa !important; border-bottom: 2px solid #7a0700 !important; display: flex; align-items: center; justify-content: space-between; }
-        .online-dot { width: 9px; height: 9px; background: #28a745 !important; border-radius: 50%; box-shadow: 0 0 0 2px white; }
-        .close-btn { cursor: pointer; font-size: 24px; color: #7a0700 !important; font-weight: bold; }
+        .mostrar { display: block !important; }
 
         @media (max-width: 480px) {
             .msg-box { top: 20% !important; left: 5% !important; right: 5% !important; width: 90vw !important; bottom: auto !important; }
@@ -38,25 +30,23 @@
 </head>
 <body>
 
-    <!-- Botón -->
     <div class="pill-fab" onclick="document.getElementById('msg').classList.add('mostrar')">
-        <img src="https://i.postimg.cc/Jz6X1P57/ezgif-4ca1de2224c7e3.webp">
-        <div class="pill-text">
-            <span class="name">Prof. Inmer C.</span>
-            <span class="cta">¡Esto te interesa!</span>
+        <img src="https://i.postimg.cc/Jz6X1P57/ezgif-4ca1de2224c7e3.webp" style="width:45px; height:45px; border-radius:50%; border: 2px solid #7a0700 !important;">
+        <div style="margin-left: 12px;">
+            <div style="font-weight: 700; font-size: 14px; color: #212529 !important;">Prof. Inmer C.</div>
+            <div style="color: #7a0700 !important; font-size: 10px; font-weight: 800; text-transform: uppercase;">¡Esto te interesa!</div>
         </div>
     </div>
 
-    <!-- Mensaje con punto verde y texto original -->
     <div class="msg-box" id="msg">
-        <div class="msg-header">
+        <div style="padding: 14px 18px; border-bottom: 2px solid #7a0700 !important; display: flex; align-items: center; justify-content: space-between;">
             <div style="display: flex; align-items: center;">
-                <span class="online-dot"></span>
-                <strong style="font-size: 14px; color: #333; margin-left: 10px;">Prof. Inmer Camacaro</strong>
+                <span style="width: 9px; height: 9px; background: #28a745 !important; border-radius: 50%;"></span>
+                <strong style="margin-left: 10px; font-size: 14px; color: #333 !important;">Prof. Inmer Camacaro</strong>
             </div>
-            <span class="close-btn" onclick="document.getElementById('msg').classList.remove('mostrar')">×</span>
+            <span onclick="document.getElementById('msg').classList.remove('mostrar')" style="cursor:pointer; font-size: 24px; color: #7a0700 !important; font-weight: bold;">×</span>
         </div>
-        <div style="padding: 20px; font-size: 15px; color: #333; line-height: 1.6;">
+        <div style="padding: 20px; font-size: 15px; color: #333 !important; line-height: 1.6;">
             ¡Hola! Te recuerdo que el cumplimiento del <strong>Dossier de Rol Asignado</strong> es un requisito <strong>indispensable</strong>. Sin esta entrega previa, no podrás participar en el Debate. No lo dejes para último ¡Mucho éxito!
         </div>
     </div>
