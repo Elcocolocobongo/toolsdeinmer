@@ -4,50 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: transparent; overflow: hidden; display: flex; justify-content: center; align-items: flex-start; }
+        body { margin: 0; padding: 0; background: transparent; overflow: visible; font-family: 'Segoe UI', sans-serif; }
         
-        .canvas {
-            width: 100vw;
-            /* La altura se calcula sola para mantener la proporción 508:283 */
-            height: calc(100vw * (283 / 508)); 
-            max-width: 508px;
-            max-height: 283px;
-            position: relative;
-            overflow: hidden;
-            border-radius: 15px;
+        /* Contenedor que mantiene el espacio */
+        .widget-wrapper { position: fixed; bottom: 20px; right: 20px; z-index: 999999; }
+
+        .msg-box {
+            width: 320px; background: white; border-radius: 15px;
+            box-shadow: 0 12px 45px rgba(0,0,0,0.25);
+            opacity: 0; visibility: hidden; transition: all 0.3s ease;
+            position: absolute; bottom: 60px; right: 0;
+            border: 1px solid #7a0700; overflow: hidden;
         }
-
-        img { width: 100%; height: 100%; object-fit: contain; display: block; }
-
-        .curtain {
-            position: absolute;
-            top: 0; left: 0;
-            width: 200%; height: 100%;
-            background: linear-gradient(to right, transparent 0%, transparent 15%, white 25%, white 100%);
-            animation: slide 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-            z-index: 2;
+        .active .msg-box { opacity: 1; visibility: visible; }
+        
+        .pill-fab { display: flex; align-items: center; background: white; padding: 6px 20px 6px 6px; border-radius: 40px; cursor: pointer; box-shadow: 0 8px 25px rgba(0,0,0,0.15); border: 1px solid #7a0700; }
+        
+        @media (max-width: 480px) {
+            .active .msg-box { position: fixed !important; top: 20% !important; left: 5%; right: 5%; width: 90vw !important; bottom: auto !important; }
         }
-
-        .shine {
-            position: absolute;
-            top: 0; left: -150%;
-            width: 60%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.8), transparent);
-            transform: skewX(-25deg);
-            animation: light 0.8s ease-in-out 1.5s forwards;
-            z-index: 3;
-        }
-
-        @keyframes slide { 0% { transform: translateX(-35%); } 100% { transform: translateX(100%); } }
-        @keyframes light { 0% { left: -150%; } 100% { left: 150%; } }
     </style>
 </head>
 <body>
-    <div class="canvas">
-        <img src="https://i.postimg.cc/3RB3mzDT/d47e4141-e04b-4c9e-a77b-2c2fd117de53-ezgif-com-jpg-to-webp-converter.webp">
-        <div class="curtain"></div>
-        <div class="shine"></div>
+    <div class="widget-wrapper" id="widget">
+        <div class="msg-box">
+            <div style="padding:15px; border-bottom:2px solid #7a0700; display:flex; justify-content:space-between; align-items:center;">
+                <strong>Prof. Inmer Camacaro</strong>
+                <span onclick="toggle()" style="cursor:pointer; font-size:20px;">×</span>
+            </div>
+            <div style="padding:20px; font-size:15px;">¡Hola! El cumplimiento del <strong>Dossier de Rol Asignado</strong> es requisito <strong>indispensable</strong>. ¡Mucho éxito!</div>
+        </div>
+        <div class="pill-fab" onclick="toggle()">
+            <img src="https://i.postimg.cc/Jz6X1P57/ezgif-4ca1de2224c7e3.webp" style="width:40px; height:40px; border-radius:50%;">
+            <div style="margin-left:10px;"><strong>Prof. Inmer C.</strong></div>
+        </div>
     </div>
+    <script>function toggle(){document.getElementById('widget').classList.toggle('active');}</script>
 </body>
 </html>
